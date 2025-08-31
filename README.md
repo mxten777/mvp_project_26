@@ -1,5 +1,5 @@
 
-# 리조트 예약 시스템
+# Resort BAIKAL - 프리미엄 리조트 예약 시스템
 
 ## 스택
 - Vite + React + TailwindCSS
