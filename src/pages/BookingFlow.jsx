@@ -1,7 +1,8 @@
 import MainNav from "../components/MainNav";
 import { useState } from "react";
 import Input from "../components/Input";
-import Toast, { useToast } from "../components/Toast";
+import Toast from "../components/Toast";
+import { useToast } from "../components/ToastHook";
 import Layout from "../components/Layout";
 
 export default function BookingFlow() {

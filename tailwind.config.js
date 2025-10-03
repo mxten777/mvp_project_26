@@ -6,12 +6,43 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        // 메인 산세리프 폰트 (본문용)
         sans: [
-          'Pretendard',
+          'Inter Variable',
           'Inter',
-          'ui-sans-serif',
+          'Pretendard Variable',
+          'Pretendard',
+          'Noto Sans KR',
+          '-apple-system',
+          'BlinkMacSystemFont',
           'system-ui',
           'sans-serif',
+        ],
+        // 헤딩용 폰트 (제목용)
+        heading: [
+          'Poppins',
+          'Inter Variable',
+          'Inter',
+          'Pretendard Variable',
+          'Pretendard',
+          'system-ui',
+          'sans-serif',
+        ],
+        // 디스플레이 폰트 (브랜드명, 큰 제목용)
+        display: [
+          'Space Grotesk',
+          'Poppins',
+          'Inter Variable',
+          'system-ui',
+          'sans-serif',
+        ],
+        // 모노스페이스 폰트 (코드, 숫자용)
+        mono: [
+          'JetBrains Mono',
+          'Fira Code',
+          'Consolas',
+          'Monaco',
+          'monospace',
         ],
       },
       colors: {

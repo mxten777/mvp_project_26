@@ -2,15 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-	@apply bg-gradient-to-br from-purple-50 via-white to-purple-100 font-sans text-gray-800 antialiased;
+	background: linear-gradient(to bottom right, #faf5ff, #ffffff, #f3e8ff);
+	font-family: 'Inter Variable', 'Inter', 'Pretendard Variable', 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+	color: #1f2937;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 h1, h2, h3, h4, h5, h6 {
-	@apply font-extrabold text-brand;
+	font-weight: 700;
+	color: #7c3aed;
+	font-family: 'Poppins', 'Space Grotesk', 'Inter Variable', 'Inter', system-ui, sans-serif;
+	letter-spacing: -0.025em;
+}
+
+h1 {
+	font-weight: 800;
+	letter-spacing: -0.05em;
+	font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
 }
 
 a {
-	@apply text-brand hover:text-brand-dark transition;
+	color: #7c3aed;
+	transition: all 0.2s;
+	font-weight: 500;
+}
+
+a:hover {
+	color: #5b21b6;
+}
+
+/* 버튼 폰트 최적화 */
+button {
+	font-family: 'Inter Variable', 'Inter', 'Pretendard Variable', system-ui, sans-serif;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+/* 코드/숫자용 폰트 */
+.font-mono, code, pre {
+	font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+	font-feature-settings: "liga" 1, "calt" 1;
 }

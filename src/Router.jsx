@@ -10,11 +10,13 @@ import NotFound from "./pages/NotFound";
 import Facilities from "./pages/Facilities";
 import Events from "./pages/Events";
 import BookingFlow from "./pages/BookingFlow";
+import ContactFeedback from "./pages/ContactFeedback";
 import AdminDashboard from "./pages/AdminDashboard";
 import RoomAdmin from "./pages/RoomAdmin";
 import ReservationAdmin from "./pages/ReservationAdmin";
 import CouponAdmin from "./pages/CouponAdmin";
 import UserAdmin from "./pages/UserAdmin";
+import ReviewAdmin from "./pages/ReviewAdmin";
 
 function Router() {
   return (
@@ -27,6 +29,7 @@ function Router() {
         <Route path="/facilities" element={<Facilities />} />
         <Route path="/events" element={<Events />} />
         <Route path="/booking/*" element={<BookingFlow />} />
+        <Route path="/contact" element={<ContactFeedback />} />
         {/* 인증 */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -34,6 +37,7 @@ function Router() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/rooms" element={<RoomAdmin />} />
         <Route path="/admin/reservations" element={<ReservationAdmin />} />
+        <Route path="/admin/reviews" element={<ReviewAdmin />} />
         <Route path="/admin/coupons" element={<CouponAdmin />} />
         <Route path="/admin/users" element={<UserAdmin />} />
         <Route path="*" element={<NotFound />} />
