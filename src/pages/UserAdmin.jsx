@@ -31,49 +31,56 @@ export default function UserAdmin() {
   return (
     <Layout>
       <AdminNav />
-      <div className="p-8 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8">사용자/로그 관리</h2>
-        <div className="mb-4 flex justify-end">
-          <Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => setOpen(true)}>사용자 추가</Button>
+      <div className="py-12 px-4 max-w-3xl mx-auto animate-fade-in">
+        <h2 className="text-3xl font-extrabold text-brand mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 사용자/로그 관리</h2>
+        <div className="mb-6 flex justify-end">
+          <Button className="bg-brand hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-xl shadow-brand transition text-lg" onClick={() => setOpen(true)}>사용자 추가</Button>
         </div>
-        <table className="w-full bg-white rounded shadow text-sm">
+        <table className="w-full bg-white rounded-2xl shadow-brand text-base border border-brand-light/30 animate-fade-in">
           <thead>
             <tr className="border-b">
-              <th className="py-2">이름</th>
-              <th>이메일</th>
-              <th>역할</th>
-              <th>상태</th>
-              <th>관리</th>
+              <th className="py-3 text-brand-dark">이름</th>
+              <th className="text-brand-dark">이메일</th>
+              <th className="text-brand-dark">역할</th>
+              <th className="text-brand-dark">상태</th>
+              <th className="text-brand-dark">관리</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} className="border-b last:border-0">
-                <td className="py-2">{u.name}</td>
+              <tr key={u.id} className="border-b last:border-0 hover:bg-brand-light/10 transition">
+                <td className="py-3 font-bold text-brand">{u.name}</td>
                 <td>{u.email}</td>
                 <td>{u.role}</td>
-                <td>{u.status}</td>
                 <td>
-                  <Button className="text-xs bg-gray-200 mr-2">수정</Button>
-                  <Button className="text-xs bg-red-200">삭제</Button>
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${u.status === "활성" ? "bg-brand text-white" : "bg-gray-300 text-gray-700"}`}>
+                    {u.status}
+                  </span>
+                </td>
+                <td>
+                  <Button className="text-xs bg-brand-light hover:bg-brand px-4 py-2 rounded-xl font-bold text-brand-dark mr-2 transition">수정</Button>
+                  <Button className="text-xs bg-red-200 hover:bg-red-400 px-4 py-2 rounded-xl font-bold text-red-700 transition">삭제</Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="mt-8">
-          <div className="font-bold mb-2">감사로그(최근)</div>
-          <table className="w-full bg-white rounded shadow text-xs">
+        <div className="mt-10">
+          <div className="font-extrabold text-lg text-brand mb-4 flex items-center gap-2">
+            <span>감사로그(최근)</span>
+            <span className="bg-brand text-white text-xs px-3 py-1 rounded-full">실시간</span>
+          </div>
+          <table className="w-full bg-white rounded-2xl shadow-brand text-sm border border-brand-light/30 animate-fade-in">
             <thead>
               <tr className="border-b">
-                <th className="py-2">일시</th>
-                <th>사용자</th>
-                <th>액션</th>
+                <th className="py-3 text-brand-dark">일시</th>
+                <th className="text-brand-dark">사용자</th>
+                <th className="text-brand-dark">액션</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="py-2">2025-08-30 10:12</td>
+                <td className="py-3">2025-08-30 10:12</td>
                 <td>홍길동</td>
                 <td>예약 생성</td>
               </tr>
@@ -86,29 +93,29 @@ export default function UserAdmin() {
           </table>
         </div>
         <Modal open={open} onClose={() => setOpen(false)} title="사용자 추가">
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
             <div>
-              <label className="block mb-1 font-medium">이름</label>
-              <input name="name" value={form.name} onChange={handleChange} className="w-full border rounded px-3 py-2" required />
+              <label className="block mb-2 font-bold text-brand">이름</label>
+              <input name="name" value={form.name} onChange={handleChange} className="w-full border border-brand-light rounded-xl px-4 py-3 focus:outline-brand text-lg" required />
             </div>
             <div>
-              <label className="block mb-1 font-medium">이메일</label>
-              <input name="email" value={form.email} onChange={handleChange} className="w-full border rounded px-3 py-2" required />
+              <label className="block mb-2 font-bold text-brand">이메일</label>
+              <input name="email" value={form.email} onChange={handleChange} className="w-full border border-brand-light rounded-xl px-4 py-3 focus:outline-brand text-lg" required />
             </div>
             <div>
-              <label className="block mb-1 font-medium">역할</label>
-              <input name="role" value={form.role} onChange={handleChange} className="w-full border rounded px-3 py-2" required />
+              <label className="block mb-2 font-bold text-brand">역할</label>
+              <input name="role" value={form.role} onChange={handleChange} className="w-full border border-brand-light rounded-xl px-4 py-3 focus:outline-brand text-lg" required />
             </div>
             <div>
-              <label className="block mb-1 font-medium">상태</label>
-              <select name="status" value={form.status} onChange={handleChange} className="w-full border rounded px-3 py-2">
+              <label className="block mb-2 font-bold text-brand">상태</label>
+              <select name="status" value={form.status} onChange={handleChange} className="w-full border border-brand-light rounded-xl px-4 py-3 focus:outline-brand text-lg">
                 <option>활성</option>
                 <option>비활성</option>
               </select>
             </div>
-            <div className="flex justify-end gap-2 pt-2">
-              <Button type="button" className="bg-gray-200 text-gray-700" onClick={() => setOpen(false)}>취소</Button>
-              <Button type="submit" className="bg-blue-600 text-white">저장</Button>
+            <div className="flex justify-end gap-3 pt-2">
+              <Button type="button" className="bg-gray-200 text-gray-700 font-bold px-6 py-3 rounded-xl text-lg" onClick={() => setOpen(false)}>취소</Button>
+              <Button type="submit" className="bg-brand hover:bg-brand-dark text-white font-bold px-8 py-3 rounded-xl text-lg shadow-brand transition">저장</Button>
             </div>
           </form>
         </Modal>

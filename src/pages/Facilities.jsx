@@ -14,16 +14,21 @@ export default function Facilities() {
   return (
     <Layout>
       <MainNav />
-      <div className="p-8 max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8">편의시설</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="py-12 px-4 max-w-5xl mx-auto">
+        <h2 className="text-3xl font-extrabold text-brand mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 편의시설</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {facilities.map((f) => (
-            <div key={f.name} className="bg-white rounded-lg shadow p-6 flex flex-col items-center text-center">
-              <div className="text-4xl mb-3">{f.icon}</div>
-              <div className="font-bold text-lg mb-1">{f.name}</div>
-              <div className="text-gray-600 text-sm">{f.desc}</div>
+            <div key={f.name} className="bg-white rounded-2xl shadow-brand hover:shadow-xl transition flex flex-col items-center text-center border border-brand-light/30 animate-fade-in">
+              <div className="text-5xl mb-4">{f.icon}</div>
+              <div className="font-extrabold text-lg text-brand mb-2 font-sans">{f.name}</div>
+              <div className="text-gray-700 text-base mb-2 font-sans">{f.desc}</div>
+              <div className="text-xs text-brand-dark/70 mb-2">최신 시설, 청결 관리, 안전 인증 완료</div>
+              <a href="/booking" className="mt-3 inline-block bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-lg shadow-brand text-sm transition">이 시설로 예약하기</a>
             </div>
           ))}
+        </div>
+        <div className="mt-12 text-center text-gray-600 text-sm animate-fade-in">
+          모든 시설은 바이칼 리조트의 엄격한 품질 관리와 안전 기준을 통과한 최신 설비입니다.<br />고객의 편안함과 만족을 위해 최선을 다합니다.
         </div>
       </div>
     </Layout>

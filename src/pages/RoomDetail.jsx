@@ -41,14 +41,33 @@ export default function RoomDetail() {
   return (
     <Layout>
       <MainNav />
-      <div className="p-8 max-w-2xl mx-auto">
-        <img src={room.img} alt={room.name} className="rounded mb-6 w-full h-64 object-cover" />
-        <h2 className="text-2xl font-bold mb-2">{room.name}</h2>
-        <div className="text-gray-600 mb-2">{room.desc}</div>
-        <div className="text-blue-600 font-semibold mb-4">₩{room.price.toLocaleString()}</div>
-        <div className="mb-6 text-gray-700">{room.detail}</div>
-        <Link to="/booking" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-          예약하기
+      <div className="py-12 px-4 max-w-2xl mx-auto bg-white rounded-2xl shadow-brand border border-brand-light/30 animate-fade-in">
+        <img src={room.img} alt={room.name} className="rounded-2xl mb-8 w-full h-64 object-cover shadow-brand" />
+        <h2 className="text-3xl font-extrabold text-brand mb-2 font-sans drop-shadow-lg flex items-center gap-2">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#a78bfa"/><path d="M9.5 12.5l2 2 3-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          {room.name}
+        </h2>
+        <div className="text-lg text-gray-600 mb-2 font-sans">{room.desc}</div>
+        <div className="text-brand-dark font-bold mb-4 text-xl">₩{room.price.toLocaleString()}</div>
+        <div className="mb-6 text-gray-700 text-base font-sans">{room.detail}</div>
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-brand mb-2">주요 편의시설</h3>
+          <ul className="grid grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />무료 Wi-Fi</li>
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />에어컨/난방</li>
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />TV/케이블</li>
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />욕실/어메니티</li>
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />룸서비스</li>
+            <li className="flex items-center gap-2"><span className="inline-block w-2 h-2 bg-brand rounded-full" />발코니/테라스</li>
+          </ul>
+        </div>
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-brand mb-2">실제 이용 후기</h3>
+          <div className="bg-brand-light/10 rounded p-3 text-gray-700 text-sm mb-2">“정말 쾌적하고 전망이 최고였어요!” <span className="text-brand-dark">- 김OO</span></div>
+          <div className="bg-brand-light/10 rounded p-3 text-gray-700 text-sm">“가족 모두 만족한 여행, 다음에도 꼭 올게요.” <span className="text-brand-dark">- 이OO</span></div>
+        </div>
+        <Link to="/booking" className="block w-full text-center bg-brand hover:bg-brand-dark text-white font-bold px-6 py-4 rounded-xl shadow-brand transition text-lg">
+          지금 예약하기
         </Link>
       </div>
     </Layout>

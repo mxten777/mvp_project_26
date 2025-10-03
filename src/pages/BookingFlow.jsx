@@ -58,9 +58,9 @@ export default function BookingFlow() {
   return (
     <Layout>
       <MainNav />
-      <div className="p-8 max-w-xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6">예약하기</h2>
-        <div className="mb-8 flex gap-2 text-sm">
+      <div className="py-12 px-4 max-w-xl mx-auto bg-white rounded-2xl shadow-brand border border-brand-light/30 animate-fade-in">
+        <h2 className="text-3xl font-extrabold text-brand mb-8 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 예약하기</h2>
+        <div className="mb-10 flex gap-3 text-base justify-center">
           <StepLabel n={1} step={step}>날짜/인원</StepLabel>
           <StepLabel n={2} step={step}>객실선택</StepLabel>
           <StepLabel n={3} step={step}>고객정보</StepLabel>
@@ -71,8 +71,8 @@ export default function BookingFlow() {
             <Input label="체크인 날짜" type="date" name="checkin" value={form.checkin} onChange={handleChange} />
             <Input label="체크아웃 날짜" type="date" name="checkout" value={form.checkout} onChange={handleChange} />
             <Input label="인원" type="number" min={1} max={10} name="people" value={form.people} onChange={handleChange} />
-            <button className="w-full bg-blue-600 text-white py-2 rounded" onClick={handleNextStep1}>
-              다음
+            <button className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow-brand transition text-lg" onClick={handleNextStep1}>
+              다음 단계
             </button>
           </div>
         )}
@@ -85,11 +85,11 @@ export default function BookingFlow() {
               <option>디럭스룸</option>
               <option>스위트룸</option>
             </select>
-            <button className="w-full bg-blue-600 text-white py-2 rounded mb-2" onClick={handleNextStep2}>
-              다음
+            <button className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow-brand transition text-lg mb-2" onClick={handleNextStep2}>
+              다음 단계
             </button>
-            <button className="w-full bg-gray-200 text-gray-700 py-2 rounded" onClick={() => setStep(1)}>
-              이전
+            <button className="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-lg" onClick={() => setStep(1)}>
+              이전 단계
             </button>
           </div>
         )}
@@ -99,22 +99,22 @@ export default function BookingFlow() {
             <Input label="연락처" type="tel" name="phone" value={form.phone} onChange={handleChange} />
             <Input label="이메일" type="email" name="email" value={form.email} onChange={handleChange} />
             <button
-              className="w-full bg-blue-600 text-white py-2 rounded mb-2"
+              className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow-brand transition text-lg mb-2"
               onClick={handleNextStep3}
             >
-              예약완료
+              예약 완료
             </button>
-            <button className="w-full bg-gray-200 text-gray-700 py-2 rounded" onClick={() => setStep(2)}>
-              이전
+            <button className="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold text-lg" onClick={() => setStep(2)}>
+              이전 단계
             </button>
           </div>
         )}
         {step === 4 && (
-          <div className="text-center">
-            <div className="text-3xl mb-4">🎉</div>
-            <div className="text-lg font-bold mb-2">예약이 완료되었습니다!</div>
-            <div className="text-gray-600 mb-4">입력하신 연락처로 예약 안내가 발송됩니다.</div>
-            <button className="w-full bg-blue-600 text-white py-2 rounded" onClick={handleReset}>
+          <div className="text-center animate-fade-in">
+            <div className="text-4xl mb-4">🎉</div>
+            <div className="text-xl font-extrabold text-brand mb-2">예약이 완료되었습니다!</div>
+            <div className="text-gray-700 mb-4">입력하신 연락처로 예약 안내가 발송됩니다.<br />빠른 체크인/체크아웃, 실시간 예약 관리가 가능합니다.</div>
+            <button className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-xl shadow-brand transition text-lg" onClick={handleReset}>
               새 예약하기
             </button>
           </div>
@@ -128,7 +128,7 @@ export default function BookingFlow() {
 
 function StepLabel({ n, step, children }) {
   return (
-    <span className={`px-3 py-1 rounded-full ${step === n ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-600"}`}>
+    <span className={`px-4 py-2 rounded-full font-bold text-base transition-all duration-300 shadow-brand ${step === n ? "bg-brand text-white" : "bg-gray-200 text-brand-dark/70"}`}>
       {children}
     </span>
   );

@@ -51,17 +51,20 @@ export default function RoomList() {
   return (
     <Layout>
       <MainNav />
-      <div className="p-8 max-w-5xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8">객실 리스트</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="py-12 px-4 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-extrabold text-brand mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 객실 리스트</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {rooms.map((room) => (
-            <div key={room.id} className="bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col overflow-hidden">
-              <img src={room.img} alt={room.name} className="w-full h-40 object-cover" />
-              <div className="flex-1 flex flex-col p-4">
-                <div className="font-bold text-lg mb-1">{room.name}</div>
-                <div className="text-gray-600 mb-2 text-sm">{room.desc}</div>
-                <div className="text-blue-600 font-semibold mb-4">₩{room.price.toLocaleString()}</div>
-                <Link to={`/rooms/${room.id}`} className="mt-auto text-sm bg-blue-600 text-white px-3 py-2 rounded text-center hover:bg-blue-700 transition">
+            <div key={room.id} className="bg-white rounded-2xl shadow-brand hover:shadow-xl transition flex flex-col overflow-hidden border border-brand-light/30 animate-fade-in">
+              <img src={room.img} alt={room.name} className="w-full h-44 object-cover rounded-t-2xl" />
+              <div className="flex-1 flex flex-col p-5">
+                <div className="font-extrabold text-xl text-brand mb-2 flex items-center gap-2">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#a78bfa"/><path d="M9.5 12.5l2 2 3-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  {room.name}
+                </div>
+                <div className="text-gray-600 mb-3 text-base font-sans">{room.desc}</div>
+                <div className="text-brand-dark font-bold mb-4 text-lg">₩{room.price.toLocaleString()}</div>
+                <Link to={`/rooms/${room.id}`} className="mt-auto text-base bg-brand hover:bg-brand-dark text-white font-bold px-4 py-2 rounded-lg shadow-brand text-center transition">
                   상세보기
                 </Link>
               </div>
