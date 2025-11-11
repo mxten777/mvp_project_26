@@ -35,62 +35,120 @@ export default function RoomAdmin() {
   return (
     <Layout>
       <AdminNav />
-      <div className="p-8 max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8">객실/요금/시즌/블랙아웃 관리</h2>
-        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-          <input
-            type="text"
-            placeholder="객실명 검색..."
-            className="border rounded px-3 py-2 w-full md:w-60"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-          <Button className="bg-blue-600 text-white hover:bg-blue-700" onClick={() => setOpen(true)}>객실 추가</Button>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              객실/요금/시즌 관리
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">리조트 객실 정보와 요금을 관리합니다</p>
+          </div>
+          
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="객실명 검색..."
+                className="w-full sm:w-80 px-4 py-3 pl-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+            <Button 
+              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105" 
+              onClick={() => setOpen(true)}
+            >
+              + 객실 추가
+            </Button>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">객실명</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">요금</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">시즌</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-white">관리</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  {filteredRooms.map((r, index) => (
+                    <tr key={r.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mr-3">
+                            <span className="text-white font-bold">🏨</span>
+                          </div>
+                          <span className="text-gray-900 dark:text-white font-medium">{r.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-gray-900 dark:text-white font-semibold">₩{r.price.toLocaleString()}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          r.season === '성수기' 
+                            ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' 
+                            : 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                        }`}>
+                          {r.season}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <div className="flex justify-center space-x-2">
+                          <button className="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+                            수정
+                          </button>
+                          <button className="px-3 py-1 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-lg text-sm font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+                            삭제
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">블랙아웃(재고막기) 관리</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">날짜</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">객실</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">사유</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-white">관리</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <td className="px-6 py-4 text-gray-900 dark:text-white font-medium">2025-09-10</td>
+                      <td className="px-6 py-4 text-gray-900 dark:text-white">스위트룸</td>
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 rounded-full text-sm font-medium">
+                          정기점검
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <button className="px-4 py-2 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-lg text-sm font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+                          해제
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <table className="w-full bg-white rounded shadow text-sm">
-          <thead>
-            <tr className="border-b">
-              <th className="py-2 cursor-pointer">객실명</th>
-              <th>요금</th>
-              <th>시즌</th>
-              <th>관리</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredRooms.map((r) => (
-              <tr key={r.id} className="border-b last:border-0">
-                <td className="py-2">{r.name}</td>
-                <td>₩{r.price.toLocaleString()}</td>
-                <td>{r.season}</td>
-                <td>
-                  <Button className="text-xs bg-gray-200 mr-2">수정</Button>
-                  <Button className="text-xs bg-red-200">삭제</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="mt-8">
-          <div className="font-bold mb-2">블랙아웃(재고막기) 관리</div>
-          <table className="w-full bg-white rounded shadow text-sm">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2">날짜</th>
-                <th>객실</th>
-                <th>사유</th>
-                <th>관리</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="py-2">2025-09-10</td>
-                <td>스위트룸</td>
-                <td>정기점검</td>
-                <td><Button className="text-xs bg-red-200">해제</Button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      </div>
         <Modal open={open} onClose={() => setOpen(false)} title="객실 추가">
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
@@ -111,7 +169,6 @@ export default function RoomAdmin() {
             </div>
           </form>
         </Modal>
-      </div>
     </Layout>
   );
 }

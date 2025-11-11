@@ -21,6 +21,7 @@ import ReviewAdmin from "./pages/ReviewAdmin";
 // 🎬 애니메이션 컴포넌트들
 import PageTransition from "./components/PageTransition";
 import { ScrollProgressBar } from "./components/ScrollAnimations";
+import ScrollToTop from "./components/ScrollToTop";
 
 // 라우트 컴포넌트 (애니메이션 적용)
 function AnimatedRoutes() {
@@ -55,6 +56,7 @@ function AnimatedRoutes() {
 function Router() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AnimatedRoutes />
     </BrowserRouter>
   );

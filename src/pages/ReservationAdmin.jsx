@@ -31,42 +31,77 @@ export default function ReservationAdmin() {
   return (
     <Layout>
       <AdminNav />
-      <div className="py-12 px-4 max-w-5xl mx-auto animate-fade-in">
-        <h2 className="text-3xl font-extrabold text-brand mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 예약 관리</h2>
-        <div className="mb-6 flex justify-end">
-          <Button className="bg-brand hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-xl shadow-brand transition text-lg" onClick={() => setOpen(true)}>예약 추가</Button>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">예약 관리</h1>
+            <p className="text-gray-600 dark:text-gray-400">리조트 객실 예약 현황을 관리합니다</p>
+          </div>
+          
+          <div className="mb-6 flex justify-end">
+            <Button 
+              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105" 
+              onClick={() => setOpen(true)}
+            >
+              + 예약 추가
+            </Button>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 dark:bg-gray-700">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">고객명</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">객실</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">체크인</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">체크아웃</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">상태</th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-white">관리</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                  {reservations.map((r) => (
+                    <tr key={r.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mr-3">
+                            <span className="text-white font-bold text-sm">👤</span>
+                          </div>
+                          <span className="text-gray-900 dark:text-white font-medium">{r.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-gray-900 dark:text-white">{r.room}</td>
+                      <td className="px-6 py-4 text-gray-900 dark:text-white font-mono">{r.checkin}</td>
+                      <td className="px-6 py-4 text-gray-900 dark:text-white font-mono">{r.checkout}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          r.status === "예약완료" 
+                            ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" 
+                            : r.status === "체크인" 
+                            ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" 
+                            : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                        }`}>
+                          {r.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <div className="flex justify-center space-x-2">
+                          <button className="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+                            수정
+                          </button>
+                          <button className="px-3 py-1 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-lg text-sm font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+                            삭제
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <table className="w-full bg-white rounded-2xl shadow-brand text-base border border-brand-light/30 animate-fade-in">
-          <thead>
-            <tr className="border-b">
-              <th className="py-3 text-brand-dark">고객명</th>
-              <th className="text-brand-dark">객실</th>
-              <th className="text-brand-dark">체크인</th>
-              <th className="text-brand-dark">체크아웃</th>
-              <th className="text-brand-dark">상태</th>
-              <th className="text-brand-dark">관리</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reservations.map((r) => (
-              <tr key={r.id} className="border-b last:border-0 hover:bg-brand-light/10 transition">
-                <td className="py-3 font-bold text-brand">{r.name}</td>
-                <td>{r.room}</td>
-                <td>{r.checkin}</td>
-                <td>{r.checkout}</td>
-                <td>
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${r.status === "예약완료" ? "bg-brand text-white" : r.status === "체크인" ? "bg-green-500 text-white" : "bg-gray-300 text-gray-700"}`}>
-                    {r.status}
-                  </span>
-                </td>
-                <td>
-                  <Button className="text-xs bg-brand-light hover:bg-brand px-4 py-2 rounded-xl font-bold text-brand-dark mr-2 transition">수정</Button>
-                  <Button className="text-xs bg-red-200 hover:bg-red-400 px-4 py-2 rounded-xl font-bold text-red-700 transition">삭제</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      </div>
         <Modal open={open} onClose={() => setOpen(false)} title="예약 추가">
           <form onSubmit={handleSubmit} className="space-y-4 animate-fade-in">
             <div>
@@ -101,7 +136,6 @@ export default function ReservationAdmin() {
             </div>
           </form>
         </Modal>
-      </div>
     </Layout>
   );
 }

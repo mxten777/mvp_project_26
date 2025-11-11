@@ -1,6 +1,7 @@
 import AdminNav from "../components/AdminNav";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // 📊 프로페셔널 대시보드 데이터
 const kpiData = [
@@ -419,22 +420,38 @@ export default function AdminDashboard() {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
               <h3 className="text-xl font-bold text-gray-800 mb-6">빠른 액션</h3>
               <div className="grid grid-cols-2 gap-4">
-                <button className="p-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-lg">
+                <Link 
+                  to="/admin/rooms" 
+                  className="block p-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                >
                   <div className="text-2xl mb-2">🏨</div>
                   <div className="text-sm font-semibold">객실 관리</div>
-                </button>
-                <button className="p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg">
+                </Link>
+                <Link 
+                  to="/admin/reservations" 
+                  className="block p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                >
                   <div className="text-2xl mb-2">📅</div>
                   <div className="text-sm font-semibold">예약 관리</div>
-                </button>
-                <button className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all shadow-lg">
+                </Link>
+                <Link 
+                  to="/admin/reviews" 
+                  className="block p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                >
                   <div className="text-2xl mb-2">⭐</div>
                   <div className="text-sm font-semibold">리뷰 관리</div>
-                </button>
-                <button className="p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">
+                </Link>
+                <Link 
+                  to="/admin/users" 
+                  className="block p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                >
                   <div className="text-2xl mb-2">👥</div>
                   <div className="text-sm font-semibold">사용자 관리</div>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
