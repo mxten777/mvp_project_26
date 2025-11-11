@@ -1,9 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PWA 메타데이터 -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7209b7" />
+    <meta name="background-color" content="#ffffff" />
+    <meta name="display" content="standalone" />
+    <meta name="orientation" content="portrait" />
+    
+    <!-- 파비콘 및 아이콘 -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.svg" />
+    <link rel="icon" sizes="192x192" href="/images/icon-192x192.svg" />
+    <link rel="icon" sizes="512x512" href="/images/icon-512x512.svg" />
+    <link rel="mask-icon" href="/images/mask-icon.svg" color="#7c3aed" />
+    
+    <!-- iOS PWA 메타태그 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="바이칼 리조트" />
+    
+    <!-- Windows PWA 메타태그 -->
+    <meta name="msapplication-TileColor" content="#7209b7" />
+    <meta name="msapplication-TileImage" content="/images/icon-144x144.png" />
+    
+    <!-- SEO 메타데이터 -->
+    <meta name="description" content="시베리아 바이칼 호수의 프리미엄 리조트에서 최고급 휴양을 경험하세요. 럭셔리 객실, 프리미엄 다이닝, 세계적 수준의 서비스를 제공합니다." />
+    <meta name="keywords" content="바이칼리조트, 시베리아호텔, 프리미엄리조트, 럭셔리호텔, 바이칼호수, 휴양리조트" />
+    <meta name="author" content="바이칼 리조트" />
+    
+    <!-- Open Graph 메타데이터 -->
+    <meta property="og:title" content="바이칼 리조트 - 프리미엄 예약 시스템" />
+    <meta property="og:description" content="시베리아 바이칼 호수의 프리미엄 리조트에서 최고급 휴양을 경험하세요." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://baikal-resort.com" />
+    <meta property="og:image" content="/images/og-image.jpg" />
+    <meta property="og:locale" content="ko_KR" />
+    
+    <!-- Twitter Card 메타데이터 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="바이칼 리조트 - 프리미엄 예약 시스템" />
+    <meta name="twitter:description" content="시베리아 바이칼 호수의 프리미엄 리조트에서 최고급 휴양을 경험하세요." />
+    <meta name="twitter:image" content="/images/twitter-image.jpg" />
     
     <!-- Google Fonts - 프리미엄 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +55,12 @@
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     
-    <title>Resort BAIKAL - 프리미엄 바이칼 리조트</title>
+    <!-- 성능 최적화 -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <title>바이칼 리조트 - 프리미엄 예약 시스템</title>
   </head>
   <body>
     <div id="root"></div>

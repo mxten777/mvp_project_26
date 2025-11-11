@@ -1,6 +1,6 @@
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import ResortIntro from "./pages/ResortIntro";
@@ -18,14 +18,20 @@ import CouponAdmin from "./pages/CouponAdmin";
 import UserAdmin from "./pages/UserAdmin";
 import ReviewAdmin from "./pages/ReviewAdmin";
 
-function Router() {
+// 🎬 애니메이션 컴포넌트들
+import PageTransition from "./components/PageTransition";
+import { ScrollProgressBar } from "./components/ScrollAnimations";
+
+// 라우트 컴포넌트 (애니메이션 적용)
+function AnimatedRoutes() {
   return (
-    <BrowserRouter>
+    <PageTransition>
+      <ScrollProgressBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/intro" element={<ResortIntro />} />
-  <Route path="/rooms" element={<RoomList />} />
-  <Route path="/rooms/:roomId" element={<RoomDetail />} />
+        <Route path="/rooms" element={<RoomList />} />
+        <Route path="/rooms/:roomId" element={<RoomDetail />} />
         <Route path="/facilities" element={<Facilities />} />
         <Route path="/events" element={<Events />} />
         <Route path="/booking/*" element={<BookingFlow />} />
@@ -42,6 +48,14 @@ function Router() {
         <Route path="/admin/users" element={<UserAdmin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+    </PageTransition>
+  );
+}
+
+function Router() {
+  return (
+    <BrowserRouter>
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }

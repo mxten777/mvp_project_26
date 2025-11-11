@@ -1,0 +1,63 @@
+
+<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 그라데이션 정의 -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c084fc;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="secondaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 그림자 필터 -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 배경 원 -->
+  <circle cx="36" cy="36" r="28.8" fill="url(#primaryGradient)" filter="url(#shadow)"/>
+  
+  <!-- 바이칼 호수 (파도) -->
+  <path d="M 18.720000000000002 41.76 
+           Q 36 30.24 53.279999999999994 41.76
+           Q 36 47.52 18.720000000000002 41.76" 
+        fill="url(#secondaryGradient)" opacity="0.8"/>
+  
+  <!-- 리조트 건물 실루엣 -->
+  <g transform="translate(36, 27.36)">
+    <!-- 메인 건물 -->
+    <rect x="-8.64" y="-5.760000000000001" width="17.28" height="11.520000000000001" 
+          fill="white" opacity="0.9" rx="2"/>
+    
+    <!-- 좌측 건물 -->
+    <rect x="-14.4" y="-2.8800000000000003" width="4.6080000000000005" height="8.64" 
+          fill="white" opacity="0.7" rx="1"/>
+    
+    <!-- 우측 건물 -->
+    <rect x="9.792000000000002" y="-2.8800000000000003" width="4.6080000000000005" height="8.64" 
+          fill="white" opacity="0.7" rx="1"/>
+    
+    <!-- 중앙 타워 -->
+    <rect x="-1.1520000000000001" y="-10.368" width="2.3040000000000003" height="4.6080000000000005" 
+          fill="url(#accentGradient)" rx="1"/>
+  </g>
+  
+  <!-- 별/다이아몬드 장식 -->
+  <g transform="translate(50.4, 21.6)">
+    <path d="M 0,-2.3040000000000003 L 1.1520000000000001,0 L 0,2.3040000000000003 L -1.1520000000000001,0 Z" 
+          fill="white" opacity="0.8"/>
+  </g>
+  
+  <!-- 텍스트 (작은 크기에서는 생략) -->
+  
+</svg>

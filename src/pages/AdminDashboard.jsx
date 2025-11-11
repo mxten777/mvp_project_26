@@ -1,195 +1,442 @@
 import AdminNav from "../components/AdminNav";
 import Layout from "../components/Layout";
+import { useState, useEffect } from "react";
 
-const stats = [
-  { label: "오늘 체크인", value: 8 },
-  { label: "오늘 체크아웃", value: 5 },
-  { label: "점유율(%)", value: 72 },
-  { label: "금일 매출(만원)", value: 430 },
+// 📊 프로페셔널 대시보드 데이터
+const kpiData = [
+  { 
+    id: 'checkin',
+    label: "오늘 체크인", 
+    value: 12, 
+    change: +15.3,
+    icon: "🏨",
+    color: "from-emerald-500 to-emerald-600",
+    bgColor: "bg-emerald-50",
+    textColor: "text-emerald-600"
+  },
+  { 
+    id: 'checkout',
+    label: "오늘 체크아웃", 
+    value: 8, 
+    change: -5.2,
+    icon: "🚪",
+    color: "from-blue-500 to-blue-600",
+    bgColor: "bg-blue-50",
+    textColor: "text-blue-600"
+  },
+  { 
+    id: 'occupancy',
+    label: "점유율", 
+    value: 87.5, 
+    change: +12.8,
+    icon: "📈",
+    color: "from-purple-500 to-purple-600",
+    bgColor: "bg-purple-50",
+    textColor: "text-purple-600",
+    suffix: "%"
+  },
+  { 
+    id: 'revenue',
+    label: "금일 매출", 
+    value: 1240, 
+    change: +23.7,
+    icon: "💰",
+    color: "from-orange-500 to-orange-600",
+    bgColor: "bg-orange-50",
+    textColor: "text-orange-600",
+    suffix: "만원"
+  },
 ];
 
-const monthlySales = [
-  { month: "2025-05", value: 320 },
-  { month: "2025-06", value: 410 },
-  { month: "2025-07", value: 520 },
-  { month: "2025-08", value: 610 },
-  { month: "2025-09", value: 430 },
+const revenueData = [
+  { month: "1월", revenue: 2100, bookings: 145, year: "2025" },
+  { month: "2월", revenue: 1890, bookings: 132, year: "2025" },
+  { month: "3월", revenue: 2450, bookings: 167, year: "2025" },
+  { month: "4월", revenue: 2780, bookings: 189, year: "2025" },
+  { month: "5월", revenue: 3200, bookings: 212, year: "2025" },
+  { month: "6월", revenue: 3850, bookings: 245, year: "2025" },
+  { month: "7월", revenue: 4200, bookings: 267, year: "2025" },
+  { month: "8월", revenue: 4100, bookings: 259, year: "2025" },
+  { month: "9월", revenue: 3600, bookings: 234, year: "2025" },
+  { month: "10월", revenue: 3100, bookings: 201, year: "2025" },
+  { month: "11월", revenue: 2800, bookings: 187, year: "2025" },
 ];
 
-const roomOccupancy = [
-  { room: "디럭스룸", rate: 85 },
-  { room: "스위트룸", rate: 78 },
-  { room: "패밀리룸", rate: 92 },
-  { room: "스탠다드룸", rate: 67 },
+const roomStats = [
+  { 
+    name: "스탠다드룸", 
+    occupancy: 92, 
+    revenue: 680, 
+    avgRating: 4.3,
+    totalRooms: 24,
+    availableRooms: 2,
+    color: "bg-gradient-to-r from-blue-400 to-blue-500"
+  },
+  { 
+    name: "디럭스룸", 
+    occupancy: 78, 
+    revenue: 890, 
+    avgRating: 4.6,
+    totalRooms: 18,
+    availableRooms: 4,
+    color: "bg-gradient-to-r from-purple-400 to-purple-500"
+  },
+  { 
+    name: "스위트룸", 
+    occupancy: 85, 
+    revenue: 1200, 
+    avgRating: 4.8,
+    totalRooms: 12,
+    availableRooms: 2,
+    color: "bg-gradient-to-r from-emerald-400 to-emerald-500"
+  },
+  { 
+    name: "펜트하우스", 
+    occupancy: 100, 
+    revenue: 2500, 
+    avgRating: 4.9,
+    totalRooms: 4,
+    availableRooms: 0,
+    color: "bg-gradient-to-r from-orange-400 to-orange-500"
+  },
 ];
 
-const reviewStats = [
-  { room: "디럭스룸", avg: 4.8, count: 32 },
-  { room: "스위트룸", avg: 4.6, count: 21 },
-  { room: "패밀리룸", avg: 4.9, count: 18 },
-  { room: "스탠다드룸", avg: 4.2, count: 27 },
+const recentActivities = [
+  { 
+    id: 1,
+    type: "booking",
+    title: "새로운 예약",
+    description: "김민수님 - 디럭스룸 (11/15~11/17)",
+    time: "5분전",
+    icon: "📅",
+    priority: "high"
+  },
+  { 
+    id: 2,
+    type: "checkin",
+    title: "체크인 완료",
+    description: "이영희님 - 스위트룸 (11/11~11/13)",
+    time: "12분전",
+    icon: "🏨",
+    priority: "medium"
+  },
+  { 
+    id: 3,
+    type: "review",
+    title: "새로운 리뷰",
+    description: "박철수님 - ⭐⭐⭐⭐⭐ '완벽한 서비스였습니다!'",
+    time: "25분전",
+    icon: "⭐",
+    priority: "low"
+  },
+  { 
+    id: 4,
+    type: "maintenance",
+    title: "시설 점검 완료",
+    description: "스탠다드룸 202호 - 에어컨 정기점검",
+    time: "1시간전",
+    icon: "🔧",
+    priority: "medium"
+  },
 ];
 
-const eventStats = [
-  { title: "여름 패키지 할인", count: 54 },
-  { title: "키즈 페스티벌", count: 38 },
-  { title: "연박 프로모션", count: 41 },
+const alerts = [
+  {
+    id: 1,
+    type: "warning",
+    title: "객실 재고 부족",
+    message: "펜트하우스 객실이 모두 예약되었습니다.",
+    time: "방금전"
+  },
+  {
+    id: 2,
+    type: "info",
+    title: "정기 점검 예정",
+    message: "내일 오전 10시 보일러 정기점검이 예정되어 있습니다.",
+    time: "30분전"
+  },
+  {
+    id: 3,
+    type: "success",
+    title: "목표 달성",
+    message: "이번 달 매출 목표 105% 달성했습니다!",
+    time: "2시간전"
+  }
 ];
 
-const customerTypes = [
-  { type: "가족", percent: 48 },
-  { type: "커플", percent: 32 },
-  { type: "비즈니스", percent: 12 },
-  { type: "기타", percent: 8 },
-];
+// 프로페셔널 대시보드 컴포넌트들
+const KPICard = ({ data, isLoading }) => (
+  <div className={`${data.bgColor} rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group`}>
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center space-x-3">
+        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${data.color} flex items-center justify-center text-white text-xl shadow-lg`}>
+          {data.icon}
+        </div>
+        <div>
+          <p className="text-sm font-medium text-gray-600">{data.label}</p>
+          <div className="flex items-center space-x-2">
+            <p className={`text-3xl font-bold ${data.textColor}`}>
+              {isLoading ? "..." : data.value}{data.suffix || ""}
+            </p>
+            <div className={`flex items-center text-xs font-semibold px-2 py-1 rounded-full ${
+              data.change >= 0 
+                ? 'text-emerald-700 bg-emerald-100' 
+                : 'text-red-700 bg-red-100'
+            }`}>
+              <span className="mr-1">{data.change >= 0 ? '↗' : '↘'}</span>
+              {Math.abs(data.change)}%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
-const recent = [
-  { name: "홍길동", room: "디럭스룸", checkin: "08-30", checkout: "09-01", status: "예약완료" },
-  { name: "김영희", room: "스위트룸", checkin: "08-29", checkout: "08-31", status: "체크인" },
-  { name: "이철수", room: "스탠다드룸", checkin: "08-30", checkout: "08-31", status: "예약완료" },
-  { name: "박민수", room: "패밀리룸", checkin: "08-28", checkout: "08-30", status: "체크아웃" },
-];
+const RevenueChart = ({ data }) => {
+  const maxRevenue = Math.max(...data.map(d => d.revenue));
+  
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-xl font-bold text-gray-800">매출 트렌드</h3>
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+            <span className="text-sm text-gray-600">매출</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full"></div>
+            <span className="text-sm text-gray-600">예약건수</span>
+          </div>
+        </div>
+      </div>
+      
+      <div className="flex items-end space-x-2 h-64 overflow-x-auto pb-4">
+        {data.map((item, index) => (
+          <div key={index} className="flex flex-col items-center flex-shrink-0 group">
+            <div className="flex flex-col items-center justify-end h-48 space-y-1">
+              {/* 매출 바 */}
+              <div 
+                className="w-8 bg-gradient-to-t from-blue-500 to-blue-400 rounded-t-lg shadow-lg transition-all duration-300 group-hover:shadow-xl relative"
+                style={{ height: `${(item.revenue / maxRevenue) * 160}px` }}
+              >
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  {item.revenue}만원
+                </div>
+              </div>
+              
+              {/* 예약건수 바 */}
+              <div 
+                className="w-8 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-t-lg shadow-lg transition-all duration-300 group-hover:shadow-xl"
+                style={{ height: `${(item.bookings / 300) * 80}px` }}
+              >
+              </div>
+            </div>
+            <span className="text-xs text-gray-600 mt-2 font-medium">{item.month}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const RoomStatsCard = ({ room }) => (
+  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+    <div className="flex items-center justify-between mb-4">
+      <h4 className="text-lg font-bold text-gray-800">{room.name}</h4>
+      <div className={`w-12 h-12 rounded-xl ${room.color} flex items-center justify-center text-white font-bold shadow-lg`}>
+        {room.occupancy}%
+      </div>
+    </div>
+    
+    <div className="space-y-3">
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-600">점유율</span>
+        <div className="flex items-center space-x-2">
+          <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className={`h-full ${room.color} transition-all duration-500`}
+              style={{ width: `${room.occupancy}%` }}
+            ></div>
+          </div>
+          <span className="text-sm font-semibold text-gray-700">{room.occupancy}%</span>
+        </div>
+      </div>
+      
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-600">일 매출</span>
+        <span className="text-sm font-semibold text-gray-700">{room.revenue}만원</span>
+      </div>
+      
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-600">평점</span>
+        <div className="flex items-center space-x-1">
+          <span className="text-yellow-400">⭐</span>
+          <span className="text-sm font-semibold text-gray-700">{room.avgRating}</span>
+        </div>
+      </div>
+      
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-600">잔여객실</span>
+        <span className={`text-sm font-semibold ${room.availableRooms === 0 ? 'text-red-600' : 'text-emerald-600'}`}>
+          {room.availableRooms}/{room.totalRooms}
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
+const ActivityFeed = ({ activities }) => (
+  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+    <h3 className="text-xl font-bold text-gray-800 mb-6">실시간 활동</h3>
+    <div className="space-y-4 max-h-80 overflow-y-auto">
+      {activities.map((activity) => (
+        <div key={activity.id} className="flex items-start space-x-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
+            activity.priority === 'high' ? 'bg-red-100' : 
+            activity.priority === 'medium' ? 'bg-yellow-100' : 'bg-green-100'
+          }`}>
+            {activity.icon}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-gray-800">{activity.title}</p>
+            <p className="text-sm text-gray-600 truncate">{activity.description}</p>
+            <p className="text-xs text-gray-400 mt-1">{activity.time}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const AlertPanel = ({ alerts }) => (
+  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+    <h3 className="text-xl font-bold text-gray-800 mb-6">알림 센터</h3>
+    <div className="space-y-3">
+      {alerts.map((alert) => (
+        <div key={alert.id} className={`p-4 rounded-xl border-l-4 ${
+          alert.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
+          alert.type === 'info' ? 'bg-blue-50 border-blue-400' :
+          'bg-green-50 border-green-400'
+        }`}>
+          <div className="flex items-center justify-between">
+            <h4 className="text-sm font-semibold text-gray-800">{alert.title}</h4>
+            <span className="text-xs text-gray-500">{alert.time}</span>
+          </div>
+          <p className="text-sm text-gray-600 mt-1">{alert.message}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 export default function AdminDashboard() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    // 로딩 시뮬레이션
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(loadingTimer);
+    };
+  }, []);
+
   return (
     <Layout>
       <AdminNav />
-      <div className="py-6 md:py-12 px-2 md:px-4 max-w-5xl mx-auto animate-fade-in">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-brand mb-6 md:mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">프리미엄 관리자 대시보드</h2>
-        
-        {/* 통계 카드 - 모바일 최적화 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 mb-8 md:mb-12">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-gradient-to-br from-brand-light via-white to-brand rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 text-center border border-brand-light/30 animate-fade-in">
-              <div className="text-xl md:text-3xl font-extrabold text-brand mb-1 md:mb-2 drop-shadow-lg">{s.value}</div>
-              <div className="text-brand-dark text-xs md:text-base font-bold leading-tight">{s.label}</div>
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* 헤더 섹션 */}
+          <div className="mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  프로페셔널 대시보드
+                </h1>
+                <p className="text-gray-600">
+                  바이칼 리조트 관리시스템 - {currentTime.toLocaleDateString('ko-KR', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    weekday: 'long'
+                  })} {currentTime.toLocaleTimeString('ko-KR')}
+                </p>
+              </div>
+              <div className="mt-4 sm:mt-0 flex space-x-3">
+                <button className="bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg border border-gray-300 shadow-sm transition-colors">
+                  📊 리포트 생성
+                </button>
+                <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg transition-all">
+                  🔄 새로고침
+                </button>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* 월별 매출 그래프 (목업) - 모바일 최적화 */}
-        <div className="mb-8 md:mb-12 bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6">월별 매출 추이</div>
-          <div className="flex gap-2 md:gap-4 items-end h-24 md:h-32 overflow-x-auto">
-            {monthlySales.map((m) => (
-              <div key={m.month} className="flex flex-col items-center justify-end h-full min-w-0 flex-shrink-0">
-                <div className="bg-brand-light rounded-t-lg md:rounded-t-xl w-6 md:w-10" style={{ height: `${Math.max(m.value/10, 20)}px` }}>
-                  <span className="block text-brand text-xs font-bold mt-1 text-center">{m.value}</span>
-                </div>
-                <div className="text-xs text-brand-dark mt-1 md:mt-2 whitespace-nowrap">{m.month.replace('2025-', '')}월</div>
-              </div>
+          {/* KPI 카드 그리드 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {kpiData.map((kpi) => (
+              <KPICard key={kpi.id} data={kpi} isLoading={isLoading} />
             ))}
           </div>
-        </div>
 
-        {/* 객실별 점유율 - 모바일 최적화 */}
-        <div className="mb-8 md:mb-12 bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6">객실별 점유율</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-            {roomOccupancy.map((r) => (
-              <div key={r.room} className="bg-brand-light/30 rounded-lg md:rounded-xl p-3 md:p-6 text-center">
-                <div className="text-lg md:text-2xl font-extrabold text-brand mb-1 md:mb-2">{r.rate}%</div>
-                <div className="text-brand-dark text-xs md:text-base font-bold leading-tight">{r.room}</div>
-              </div>
-            ))}
+          {/* 메인 콘텐츠 그리드 */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            {/* 매출 차트 (2/3 너비) */}
+            <div className="lg:col-span-2">
+              <RevenueChart data={revenueData} />
+            </div>
+            
+            {/* 알림 패널 (1/3 너비) */}
+            <div>
+              <AlertPanel alerts={alerts} />
+            </div>
           </div>
-        </div>
 
-        {/* 리뷰/평점 통계 - 모바일 최적화 */}
-        <div className="mb-8 md:mb-12 bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6">객실별 리뷰/평점</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-            {reviewStats.map((r) => (
-              <div key={r.room} className="bg-brand-light/30 rounded-lg md:rounded-xl p-3 md:p-6 text-center">
-                <div className="text-sm md:text-xl font-bold text-brand mb-1">평점 {r.avg} / 5.0</div>
-                <div className="text-xs text-brand-dark mb-1 md:mb-2">리뷰 {r.count}건</div>
-                <div className="text-brand-dark text-xs md:text-base font-bold leading-tight">{r.room}</div>
-              </div>
+          {/* 객실 통계 그리드 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {roomStats.map((room) => (
+              <RoomStatsCard key={room.name} room={room} />
             ))}
           </div>
-        </div>
 
-        {/* 인기 이벤트/프로모션 - 모바일 최적화 */}
-        <div className="mb-8 md:mb-12 bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6">인기 이벤트/프로모션</div>
-          <ul className="space-y-2">
-            {eventStats.map((e) => (
-              <li key={e.title} className="flex justify-between items-center bg-brand-light/20 rounded-lg md:rounded-xl px-3 md:px-6 py-2 md:py-3">
-                <span className="font-bold text-brand-dark text-sm md:text-base">{e.title}</span>
-                <span className="font-bold text-brand text-sm md:text-base">{e.count}건 예약</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* 고객 유형 비율 - 모바일 최적화 */}
-        <div className="mb-8 md:mb-12 bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6">고객 유형 비율</div>
-          <div className="grid grid-cols-2 md:flex gap-4 md:gap-6 justify-center">
-            {customerTypes.map((c) => (
-              <div key={c.type} className="flex flex-col items-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-brand-light flex items-center justify-center text-lg md:text-2xl font-extrabold text-brand mb-1 md:mb-2">{c.percent}%</div>
-                <div className="text-brand-dark font-bold text-xs md:text-base">{c.type}</div>
+          {/* 하단 섹션 */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* 실시간 활동 */}
+            <ActivityFeed activities={recentActivities} />
+            
+            {/* 추가 통계 또는 빠른 액션 */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold text-gray-800 mb-6">빠른 액션</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <button className="p-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-lg">
+                  <div className="text-2xl mb-2">🏨</div>
+                  <div className="text-sm font-semibold">객실 관리</div>
+                </button>
+                <button className="p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg">
+                  <div className="text-2xl mb-2">📅</div>
+                  <div className="text-sm font-semibold">예약 관리</div>
+                </button>
+                <button className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all shadow-lg">
+                  <div className="text-2xl mb-2">⭐</div>
+                  <div className="text-sm font-semibold">리뷰 관리</div>
+                </button>
+                <button className="p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">
+                  <div className="text-2xl mb-2">👥</div>
+                  <div className="text-sm font-semibold">사용자 관리</div>
+                </button>
               </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* 최근 예약 현황 - 모바일 최적화 */}
-        <div className="bg-white rounded-xl md:rounded-2xl shadow-brand p-4 md:p-8 border border-brand-light/30 animate-fade-in">
-          <div className="font-extrabold text-base md:text-lg text-brand mb-4 md:mb-6 flex items-center gap-2">
-            <span>최근 예약 현황</span>
-            <span className="bg-brand text-white text-xs px-2 md:px-3 py-1 rounded-full">실시간</span>
-          </div>
-          {/* 모바일용 카드 레이아웃 */}
-          <div className="md:hidden space-y-3">
-            {recent.map((r, i) => (
-              <div key={i} className="bg-brand-light/10 rounded-lg p-3 border border-brand-light/20">
-                <div className="flex justify-between items-start mb-2">
-                  <span className="font-bold text-brand text-sm">{r.name}</span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${r.status === "예약완료" ? "bg-brand text-white" : r.status === "체크인" ? "bg-green-500 text-white" : "bg-gray-300 text-gray-700"}`}>
-                    {r.status}
-                  </span>
-                </div>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div><span className="font-semibold">객실:</span> {r.room}</div>
-                  <div><span className="font-semibold">체크인:</span> {r.checkin} ~ <span className="font-semibold">체크아웃:</span> {r.checkout}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* 데스크톱용 테이블 */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full text-base">
-              <thead>
-                <tr className="border-b">
-                  <th className="py-3 text-brand-dark text-left">고객명</th>
-                  <th className="text-brand-dark text-left">객실</th>
-                  <th className="text-brand-dark text-left">체크인</th>
-                  <th className="text-brand-dark text-left">체크아웃</th>
-                  <th className="text-brand-dark text-left">상태</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recent.map((r, i) => (
-                  <tr key={i} className="border-b last:border-0 hover:bg-brand-light/10 transition">
-                    <td className="py-3 font-bold text-brand">{r.name}</td>
-                    <td>{r.room}</td>
-                    <td>{r.checkin}</td>
-                    <td>{r.checkout}</td>
-                    <td>
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${r.status === "예약완료" ? "bg-brand text-white" : r.status === "체크인" ? "bg-green-500 text-white" : "bg-gray-300 text-gray-700"}`}>
-                        {r.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-6 md:mt-8 text-center md:text-right">
-            <button className="bg-brand hover:bg-brand-dark text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-lg md:rounded-xl shadow-brand transition text-sm md:text-lg w-full md:w-auto">예약 관리 바로가기</button>
+            </div>
           </div>
         </div>
       </div>

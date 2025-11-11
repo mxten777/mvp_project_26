@@ -1,4 +1,3 @@
-import MainNav from "../components/MainNav";
 import Layout from "../components/Layout";
 import ShareButtons from "../components/ShareButtons";
 
@@ -29,7 +28,6 @@ const events = [
 export default function Events() {
   return (
     <Layout>
-      <MainNav />
       <div className="py-12 px-4 max-w-5xl mx-auto">
         <h2 className="text-3xl font-extrabold text-brand mb-10 font-sans drop-shadow-lg tracking-tight animate-fade-in">이벤트 & 프로모션</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

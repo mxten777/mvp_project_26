@@ -1,10 +1,8 @@
-import MainNav from "../components/MainNav";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
     <>
-      <MainNav />
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
         <div className="text-6xl font-bold mb-4 text-blue-600">404</div>
         <div className="text-xl mb-2 font-semibold">페이지를 찾을 수 없습니다.</div>
