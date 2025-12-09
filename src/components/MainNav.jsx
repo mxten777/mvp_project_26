@@ -101,7 +101,7 @@ const MainNav = React.memo(function MainNav() {
               <Link
                 key={nav.to}
                 to={nav.to}
-                className={`group relative px-6 py-3 rounded-xl font-bold text-base transition-all duration-300 ${
+                className={`group relative px-6 py-3 rounded-xl font-black text-lg transition-all duration-300 ${
                   pathname === nav.to
                     ? `bg-gradient-to-r ${nav.color} text-white shadow-lg scale-105`
                     : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -110,7 +110,7 @@ const MainNav = React.memo(function MainNav() {
                 tabIndex={0}
               >
                 <span className="flex items-center gap-2">
-                  <span className="text-lg">{nav.icon}</span>
+                  <span className="text-xl">{nav.icon}</span>
                   <span>{nav.label}</span>
                 </span>
                 {pathname === nav.to && (

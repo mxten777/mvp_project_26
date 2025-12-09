@@ -134,7 +134,7 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
               <svg className="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
               </svg>
-              <span className="text-xs text-white/90 font-medium">1234-5678</span>
+              <span className="text-xs text-white/90 font-medium">02-5678-9012</span>
             </div>
             
             {/* 테마 토글 */}
@@ -210,7 +210,7 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
                   <svg className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
                   </svg>
-                  <span className="text-white/90 font-medium">고객센터 1234-5678</span>
+                  <span className="text-white/90 font-medium">고객센터 02-5678-9012</span>
                 </div>
                 
                 {/* GitHub 링크 */}
@@ -274,11 +274,11 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
                     </defs>
                   </svg>
                 </div>
-                <span className="font-display font-black text-xl bg-gradient-to-r from-brand-gold to-white bg-clip-text text-transparent">
+                <span className="font-display font-black text-2xl bg-gradient-to-r from-brand-gold to-white bg-clip-text text-transparent">
                   Resort BAIKAL ✨
                 </span>
               </div>
-              <p className="text-white/80 text-sm leading-relaxed">
+              <p className="text-white/90 text-base leading-relaxed font-medium">
                 바이칼의 아름다운 자연과 함께하는<br />
                 프리미엄 럭셔리 리조트 경험
               </p>
@@ -286,34 +286,37 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
 
             {/* 연락처 정보 */}
             <div className="text-center">
-              <h3 className="text-brand-gold font-bold text-lg mb-4">📞 연락처</h3>
-              <div className="space-y-3 text-white/90 text-sm">
-                <div className="flex items-center justify-center gap-2">
-                  <svg className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+              <h3 className="text-white font-black text-2xl mb-6 flex items-center justify-center gap-3">
+                <span className="text-3xl">📞</span>
+                <span className="drop-shadow-lg">연락처</span>
+              </h3>
+              <div className="space-y-4 text-white">
+                <div className="flex items-center justify-center gap-3 bg-white/15 backdrop-blur-sm rounded-xl px-6 py-4 hover:bg-white/25 transition-all shadow-lg">
+                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
                   </svg>
-                  <span className="font-semibold">1234-5678</span>
+                  <span className="font-black text-xl text-white">02-5678-9012</span>
                 </div>
-                <div className="flex items-center justify-center gap-2 bg-white/10 rounded-lg px-4 py-2 hover:bg-white/20 transition-all">
-                  <svg className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-500/25 to-orange-500/25 backdrop-blur-sm rounded-xl px-6 py-4 hover:from-yellow-500/35 hover:to-orange-500/35 transition-all border-2 border-brand-gold/40 shadow-lg">
+                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
-                  <a href="mailto:info@baikalsys.kr" className="font-bold text-brand-gold hover:text-white transition-colors">
+                  <a href="mailto:info@baikalsys.kr" className="font-black text-xl text-yellow-300 hover:text-white transition-colors">
                     info@baikalsys.kr
                   </a>
                 </div>
-                <div className="flex items-center justify-center gap-2">
-                  <svg className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-3 bg-white/15 backdrop-blur-sm rounded-xl px-6 py-4 hover:bg-white/25 transition-all shadow-lg">
+                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
                   </svg>
-                  <span>바이칼 프리미엄 리조트</span>
+                  <span className="font-bold text-lg text-white">바이칼 프리미엄 리조트</span>
                 </div>
               </div>
             </div>
 
             {/* 소셜 & 개발자 정보 */}
             <div className="text-center md:text-right">
-              <h3 className="text-brand-gold font-bold text-lg mb-4">연결</h3>
+              <h3 className="text-white font-black text-xl mb-6">🔗 연결</h3>
               <div className="flex justify-center md:justify-end gap-4 mb-4">
                 <a 
                   href="https://github.com/mxten777/mvp_project_26" 
