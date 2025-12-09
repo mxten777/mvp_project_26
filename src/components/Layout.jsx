@@ -130,11 +130,15 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
             </nav>
             
             {/* 고객센터 - 더 컴팩트하게 */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
-              <svg className="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-yellow-500/30 to-orange-500/30 rounded-lg backdrop-blur-sm border-2 border-yellow-400/60 shadow-[0_0_15px_rgba(250,204,21,0.4)]">
+              <svg className="w-4 h-4 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" style={{
+                filter: 'drop-shadow(0 0 8px rgba(253, 224, 71, 0.8)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))'
+              }}>
                 <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
               </svg>
-              <span className="text-xs text-white/90 font-medium">02-5678-9012</span>
+              <span className="text-xs text-white font-black" style={{
+                textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8)'
+              }}>02-5678-9012</span>
             </div>
             
             {/* 테마 토글 */}
@@ -205,12 +209,17 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
               </nav>
               
               <div className="pt-6 border-t border-white/20 space-y-4">
+                {/* 다크모드 토글 - 모바일용 */}
+                <div className="px-4 py-3 bg-white/10 rounded-xl backdrop-blur-sm">
+                  <PremiumThemeToggle size="md" showLabel={true} />
+                </div>
+                
                 {/* 고객센터 */}
                 <div className="flex items-center gap-3 px-4 py-3 bg-white/10 rounded-xl backdrop-blur-sm">
-                  <svg className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-300 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
                   </svg>
-                  <span className="text-white/90 font-medium">고객센터 02-5678-9012</span>
+                  <span className="text-white font-bold drop-shadow-lg">고객센터 02-5678-9012</span>
                 </div>
                 
                 {/* GitHub 링크 */}
@@ -291,25 +300,37 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
                 <span className="drop-shadow-lg">연락처</span>
               </h3>
               <div className="space-y-4 text-white">
-                <div className="flex items-center justify-center gap-3 bg-white/15 backdrop-blur-sm rounded-xl px-6 py-4 hover:bg-white/25 transition-all shadow-lg">
-                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-500/30 to-orange-500/30 backdrop-blur-sm rounded-xl px-6 py-4 hover:from-yellow-500/40 hover:to-orange-500/40 transition-all border-2 border-yellow-400/60 shadow-[0_0_20px_rgba(250,204,21,0.5)]">
+                  <svg className="w-7 h-7 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" style={{
+                    filter: 'drop-shadow(0 0 12px rgba(253, 224, 71, 1)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8))'
+                  }}>
                     <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
                   </svg>
-                  <span className="font-black text-xl text-white">02-5678-9012</span>
+                  <span className="font-black text-xl text-white" style={{
+                    textShadow: '0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(250, 204, 21, 0.8), 0 4px 8px rgba(0, 0, 0, 0.9)'
+                  }}>02-5678-9012</span>
                 </div>
-                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-500/25 to-orange-500/25 backdrop-blur-sm rounded-xl px-6 py-4 hover:from-yellow-500/35 hover:to-orange-500/35 transition-all border-2 border-brand-gold/40 shadow-lg">
-                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-yellow-500/30 to-orange-500/30 backdrop-blur-sm rounded-xl px-6 py-4 hover:from-yellow-500/40 hover:to-orange-500/40 transition-all border-2 border-yellow-400/60 shadow-[0_0_20px_rgba(250,204,21,0.5)]">
+                  <svg className="w-7 h-7 text-yellow-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" style={{
+                    filter: 'drop-shadow(0 0 12px rgba(253, 224, 71, 1)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8))'
+                  }}>
                     <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
-                  <a href="mailto:info@baikalsys.kr" className="font-black text-xl text-yellow-300 hover:text-white transition-colors">
+                  <a href="mailto:info@baikalsys.kr" className="font-black text-xl text-white hover:text-yellow-200 transition-colors" style={{
+                    textShadow: '0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(250, 204, 21, 0.8), 0 4px 8px rgba(0, 0, 0, 0.9)'
+                  }}>
                     info@baikalsys.kr
                   </a>
                 </div>
-                <div className="flex items-center justify-center gap-3 bg-white/15 backdrop-blur-sm rounded-xl px-6 py-4 hover:bg-white/25 transition-all shadow-lg">
-                  <svg className="w-7 h-7 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-500/30 to-blue-500/30 backdrop-blur-sm rounded-xl px-6 py-4 hover:from-purple-500/40 hover:to-blue-500/40 transition-all border-2 border-purple-400/60 shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                  <svg className="w-7 h-7 text-purple-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" style={{
+                    filter: 'drop-shadow(0 0 12px rgba(216, 180, 254, 1)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8))'
+                  }}>
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
                   </svg>
-                  <span className="font-bold text-lg text-white">바이칼 프리미엄 리조트</span>
+                  <span className="font-black text-lg text-white" style={{
+                    textShadow: '0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(168, 85, 247, 0.8), 0 4px 8px rgba(0, 0, 0, 0.9)'
+                  }}>바이칼 프리미엄 리조트</span>
                 </div>
               </div>
             </div>
