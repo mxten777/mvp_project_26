@@ -167,9 +167,9 @@ const alerts = [
 
 // 프로페셔널 대시보드 컴포넌트들
 const KPICard = ({ data, isLoading }) => (
-  <div className={`${data.bgColor} rounded-3xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-100 group relative overflow-hidden`}>
+  <div className={`${data.bgColor} dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-100 dark:border-gray-700 group relative overflow-hidden`}>
     {/* 배경 그라데이션 효과 */}
-    <div className={`absolute inset-0 bg-gradient-to-br ${data.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+    <div className={`absolute inset-0 bg-gradient-to-br ${data.color} opacity-0 group-hover:opacity-5 dark:group-hover:opacity-20 transition-opacity duration-500`}></div>
     
     <div className="relative z-10">
       <div className="flex items-start justify-between mb-6">
@@ -178,8 +178,8 @@ const KPICard = ({ data, isLoading }) => (
         </div>
         <div className={`flex items-center text-sm font-bold px-3 py-1.5 rounded-full ${
           data.change >= 0 
-            ? 'text-emerald-700 bg-emerald-100 shadow-emerald-200/50' 
-            : 'text-red-700 bg-red-100 shadow-red-200/50'
+            ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 shadow-emerald-200/50' 
+            : 'text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/50 shadow-red-200/50'
         } shadow-lg`}>
           <span className="mr-1 text-lg">{data.change >= 0 ? '↗' : '↘'}</span>
           {Math.abs(data.change)}%
@@ -187,9 +187,9 @@ const KPICard = ({ data, isLoading }) => (
       </div>
       
       <div className="space-y-2">
-        <p className="text-sm font-semibold text-gray-600 uppercase tracking-wider">{data.label}</p>
+        <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">{data.label}</p>
         <div className="flex items-baseline space-x-2">
-          <p className={`text-4xl sm:text-5xl font-black ${data.textColor} tabular-nums`}>
+          <p className={`text-4xl sm:text-5xl font-black ${data.textColor} dark:text-white tabular-nums`}>
             {isLoading ? (
               <span className="animate-pulse">...</span>
             ) : (
@@ -200,7 +200,7 @@ const KPICard = ({ data, isLoading }) => (
             )}
           </p>
         </div>
-        <p className="text-xs text-gray-500 font-medium">전일 대비 {data.change >= 0 ? '증가' : '감소'}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">전일 대비 {data.change >= 0 ? '증가' : '감소'}</p>
       </div>
     </div>
   </div>
@@ -211,11 +211,11 @@ const RevenueChart = ({ data }) => {
   const maxBookings = Math.max(...data.map(d => d.bookings));
   
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 hover:shadow-3xl transition-all duration-500">
+    <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-gray-700 hover:shadow-3xl transition-all duration-500">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
         <div>
-          <h3 className="text-2xl font-black text-gray-800 mb-2">📊 매출 트렌드 분석</h3>
-          <p className="text-sm text-gray-600">2025년 월별 매출 및 예약 현황</p>
+          <h3 className="text-2xl font-black text-gray-800 dark:text-white mb-2">📊 매출 트렌드 분석</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">2025년 월별 매출 및 예약 현황</p>
         </div>
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 px-4 py-2 bg-blue-50 rounded-xl">
@@ -304,13 +304,13 @@ const RevenueChart = ({ data }) => {
 };
 
 const RoomStatsCard = ({ room }) => (
-  <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 shadow-2xl border border-gray-100 hover:shadow-3xl transition-all duration-500 group relative overflow-hidden">
+  <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-6 shadow-2xl border border-gray-100 dark:border-gray-700 hover:shadow-3xl transition-all duration-500 group relative overflow-hidden">
     {/* 배경 데코레이션 */}
-    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" style={{ backgroundImage: room.color }}></div>
+    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-5 dark:opacity-10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" style={{ backgroundImage: room.color }}></div>
     
     <div className="relative z-10">
       <div className="flex items-center justify-between mb-6">
-        <h4 className="text-lg font-black text-gray-800">{room.name}</h4>
+        <h4 className="text-lg font-black text-gray-800 dark:text-white">{room.name}</h4>
         <div className={`w-16 h-16 rounded-2xl ${room.color} flex items-center justify-center text-white text-xl font-black shadow-2xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
           {room.occupancy}%
         </div>
@@ -319,10 +319,10 @@ const RoomStatsCard = ({ room }) => (
       {/* 점유율 진행바 */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-semibold text-gray-600">점유율</span>
-          <span className="text-sm font-bold text-gray-800">{room.occupancy}%</span>
+          <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">점유율</span>
+          <span className="text-sm font-bold text-gray-800 dark:text-white">{room.occupancy}%</span>
         </div>
-        <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+        <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
           <div 
             className={`h-full ${room.color} rounded-full shadow-lg transition-all duration-1000 relative overflow-hidden`}
             style={{ width: `${room.occupancy}%` }}
@@ -335,30 +335,30 @@ const RoomStatsCard = ({ room }) => (
       
       {/* 통계 그리드 */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-xl p-4 shadow-lg">
-          <p className="text-xs text-gray-600 mb-1 font-semibold">매출</p>
-          <p className="text-xl font-black text-blue-600">{room.revenue}만원</p>
+        <div className="bg-white dark:bg-gray-700 rounded-xl p-4 shadow-lg">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-semibold">매출</p>
+          <p className="text-xl font-black text-blue-600 dark:text-blue-400">{room.revenue}만원</p>
         </div>
-        <div className="bg-white rounded-xl p-4 shadow-lg">
-          <p className="text-xs text-gray-600 mb-1 font-semibold">평점</p>
+        <div className="bg-white dark:bg-gray-700 rounded-xl p-4 shadow-lg">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1 font-semibold">평점</p>
           <div className="flex items-center space-x-1">
             <span className="text-xl font-black text-yellow-500">⭐</span>
-            <span className="text-xl font-black text-gray-800">{room.avgRating}</span>
+            <span className="text-xl font-black text-gray-800 dark:text-white">{room.avgRating}</span>
           </div>
         </div>
       </div>
       
       {/* 객실 정보 */}
-      <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between">
+      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
         <div>
-          <span className="text-xs text-gray-600">전체 {room.totalRooms}실</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400">전체 {room.totalRooms}실</span>
         </div>
         <div className={`px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
           room.availableRooms === 0 
-            ? 'bg-red-100 text-red-600' 
+            ? 'bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300' 
             : room.availableRooms <= 2 
-            ? 'bg-yellow-100 text-yellow-600' 
-            : 'bg-emerald-100 text-emerald-600'
+            ? 'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-300' 
+            : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300'
         }`}>
           {room.availableRooms === 0 ? '만실' : `${room.availableRooms}실 가능`}
         </div>
@@ -368,21 +368,21 @@ const RoomStatsCard = ({ room }) => (
 );
 
 const ActivityFeed = ({ activities }) => (
-  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-    <h3 className="text-xl font-bold text-gray-800 mb-6">실시간 활동</h3>
+  <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
+    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6">실시간 활동</h3>
     <div className="space-y-4 max-h-80 overflow-y-auto">
       {activities.map((activity) => (
-        <div key={activity.id} className="flex items-start space-x-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+        <div key={activity.id} className="flex items-start space-x-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
-            activity.priority === 'high' ? 'bg-red-100' : 
-            activity.priority === 'medium' ? 'bg-yellow-100' : 'bg-green-100'
+            activity.priority === 'high' ? 'bg-red-100 dark:bg-red-900/50' : 
+            activity.priority === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/50' : 'bg-green-100 dark:bg-green-900/50'
           }`}>
             {activity.icon}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-gray-800">{activity.title}</p>
-            <p className="text-sm text-gray-600 truncate">{activity.description}</p>
-            <p className="text-xs text-gray-400 mt-1">{activity.time}</p>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">{activity.title}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{activity.description}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{activity.time}</p>
           </div>
         </div>
       ))}
@@ -391,20 +391,20 @@ const ActivityFeed = ({ activities }) => (
 );
 
 const AlertPanel = ({ alerts }) => (
-  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-    <h3 className="text-xl font-bold text-gray-800 mb-6">알림 센터</h3>
+  <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
+    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6">알림 센터</h3>
     <div className="space-y-3">
       {alerts.map((alert) => (
         <div key={alert.id} className={`p-4 rounded-xl border-l-4 ${
-          alert.type === 'warning' ? 'bg-yellow-50 border-yellow-400' :
-          alert.type === 'info' ? 'bg-blue-50 border-blue-400' :
-          'bg-green-50 border-green-400'
+          alert.type === 'warning' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-400' :
+          alert.type === 'info' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-400' :
+          'bg-green-50 dark:bg-green-900/20 border-green-400'
         }`}>
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-gray-800">{alert.title}</h4>
-            <span className="text-xs text-gray-500">{alert.time}</span>
+            <h4 className="text-sm font-semibold text-gray-800 dark:text-white">{alert.title}</h4>
+            <span className="text-xs text-gray-500 dark:text-gray-400">{alert.time}</span>
           </div>
-          <p className="text-sm text-gray-600 mt-1">{alert.message}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{alert.message}</p>
         </div>
       ))}
     </div>
@@ -517,17 +517,17 @@ export default function AdminDashboard() {
           {/* 하단 섹션 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* 실시간 활동 - 프리미엄 버전 */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 hover:shadow-3xl transition-all duration-500">
+            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-gray-700 hover:shadow-3xl transition-all duration-500">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-black text-gray-800">⚡ 실시간 활동</h3>
-                <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
+                <h3 className="text-2xl font-black text-gray-800 dark:text-white">⚡ 실시간 활동</h3>
+                <span className="px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-300 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                   LIVE
                 </span>
               </div>
               <div className="space-y-3 max-h-80 overflow-y-auto">
                 {recentActivities.map((activity) => (
-                  <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-2xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 transition-all duration-300 border border-transparent hover:border-blue-100 group">
+                  <div key={activity.id} className="flex items-start space-x-4 p-4 rounded-2xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-700 dark:hover:to-blue-900/30 transition-all duration-300 border border-transparent hover:border-blue-100 dark:hover:border-blue-700 group">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl shadow-lg transform group-hover:scale-110 transition-transform duration-300 ${
                       activity.priority === 'high' ? 'bg-gradient-to-br from-red-500 to-red-600 text-white' : 
                       activity.priority === 'medium' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500 text-white' : 
@@ -536,9 +536,9 @@ export default function AdminDashboard() {
                       {activity.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-gray-800">{activity.title}</p>
-                      <p className="text-sm text-gray-600">{activity.description}</p>
-                      <p className="text-xs text-gray-400 mt-1 font-semibold">{activity.time}</p>
+                      <p className="text-sm font-bold text-gray-800 dark:text-white">{activity.title}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{activity.description}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 font-semibold">{activity.time}</p>
                     </div>
                   </div>
                 ))}
@@ -546,8 +546,8 @@ export default function AdminDashboard() {
             </div>
             
             {/* 빠른 액션 - 프리미엄 버전 */}
-            <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 hover:shadow-3xl transition-all duration-500">
-              <h3 className="text-2xl font-black text-gray-800 mb-6">🚀 빠른 액션</h3>
+            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-gray-700 hover:shadow-3xl transition-all duration-500">
+              <h3 className="text-2xl font-black text-gray-800 dark:text-white mb-6">🚀 빠른 액션</h3>
               <div className="grid grid-cols-2 gap-4">
                 <Link 
                   to="/admin/rooms" 

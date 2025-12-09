@@ -192,7 +192,7 @@ export default function BookingFlow() {
                   <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
                     <span className="text-4xl">📅</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">날짜 및 인원 선택</h2>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 dark:text-white mb-2">날짜 및 인원 선택</h2>
                   <p className="text-gray-600">완벽한 휴식을 위한 첫걸음</p>
                 </div>
 
@@ -258,7 +258,7 @@ export default function BookingFlow() {
                   <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
                     <span className="text-4xl">🏨</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">객실 선택</h2>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 dark:text-white mb-2">객실 선택</h2>
                   <p className="text-gray-600">럭셔리 객실을 선택해보세요</p>
                 </div>
 
@@ -281,7 +281,7 @@ export default function BookingFlow() {
                         />
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-2">
-                            <h3 className="text-xl font-bold text-gray-800">{room.name}</h3>
+                            <h3 className="text-xl font-bold text-gray-800 dark:text-white">{room.name}</h3>
                             <div className="text-right">
                               <div className="text-2xl font-bold text-brand-primary">
                                 ₩{room.price.toLocaleString()}
@@ -343,7 +343,7 @@ export default function BookingFlow() {
                   <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
                     <span className="text-4xl">👤</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">고객 정보 입력</h2>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 dark:text-white mb-2">고객 정보 입력</h2>
                   <p className="text-gray-600">예약 확정을 위한 마지막 단계</p>
                 </div>
 
@@ -398,7 +398,7 @@ export default function BookingFlow() {
                 </div>
 
                 <div className="bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">개인정보 처리 안내</h3>
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">개인정보 처리 안내</h3>
                   <div className="text-sm text-gray-600 space-y-2">
                     <p>• 수집된 개인정보는 예약 확인 및 숙박 서비스 제공 목적으로만 사용됩니다.</p>
                     <p>• 고객님의 개인정보는 안전하게 보호되며, 제3자에게 제공되지 않습니다.</p>
@@ -434,51 +434,51 @@ export default function BookingFlow() {
                 <div className="text-6xl mb-6">🎉</div>
                 
                 <div>
-                  <h2 className="text-4xl font-bold text-gray-800 mb-4">예약이 완료되었습니다!</h2>
+                  <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">예약이 완료되었습니다!</h2>
                   <p className="text-xl text-gray-600">Resort BAIKAL에서 특별한 경험을 준비해드리겠습니다</p>
                 </div>
 
                 <div className="bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-6">예약 확인서</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">예약 확인서</h3>
                   
                   <div className="space-y-4 text-left">
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">예약자명</span>
-                      <span className="text-gray-800">{form.name}</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">예약자명</span>
+                      <span className="text-gray-800 dark:text-white">{form.name}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">연락처</span>
-                      <span className="text-gray-800">{form.phone}</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">연락처</span>
+                      <span className="text-gray-800 dark:text-white">{form.phone}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">객실</span>
-                      <span className="text-gray-800">{form.room?.name}</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">객실</span>
+                      <span className="text-gray-800 dark:text-white">{form.room?.name}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">체크인</span>
-                      <span className="text-gray-800">{form.checkin}</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">체크인</span>
+                      <span className="text-gray-800 dark:text-white">{form.checkin}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">체크아웃</span>
-                      <span className="text-gray-800">{form.checkout}</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">체크아웃</span>
+                      <span className="text-gray-800 dark:text-white">{form.checkout}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">숙박 기간</span>
-                      <span className="text-gray-800">{nights}박 {nights + 1}일</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">숙박 기간</span>
+                      <span className="text-gray-800 dark:text-white">{nights}박 {nights + 1}일</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-semibold text-gray-700">인원</span>
-                      <span className="text-gray-800">{form.people}명</span>
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">인원</span>
+                      <span className="text-gray-800 dark:text-white">{form.people}명</span>
                     </div>
                     <div className="flex justify-between items-center pt-4">
-                      <span className="text-xl font-bold text-gray-800">총 결제금액</span>
+                      <span className="text-xl font-bold text-gray-800 dark:text-white">총 결제금액</span>
                       <span className="text-2xl font-bold text-brand-primary">₩{totalPrice.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-blue-50 rounded-xl p-6">
-                  <h4 className="font-bold text-gray-800 mb-3">📧 예약 확인 안내</h4>
+                  <h4 className="font-bold text-gray-800 dark:text-white mb-3">📧 예약 확인 안내</h4>
                   <div className="text-sm text-gray-600 space-y-2 text-left">
                     <p>• 예약 확인서가 <strong>{form.email}</strong>로 발송되었습니다.</p>
                     <p>• 체크인 24시간 전까지 무료 취소가 가능합니다.</p>
@@ -512,7 +512,7 @@ export default function BookingFlow() {
             <div className="sticky top-8 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
               {form.room && (
                 <>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-6">예약 요약</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">예약 요약</h3>
                   
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-4">
@@ -522,7 +522,7 @@ export default function BookingFlow() {
                         className="w-16 h-16 object-cover rounded-lg"
                       />
                       <div>
-                        <h4 className="font-bold text-gray-800">{form.room.name}</h4>
+                        <h4 className="font-bold text-gray-800 dark:text-white">{form.room.name}</h4>
                         <p className="text-sm text-gray-600">{form.room.desc}</p>
                       </div>
                     </div>
@@ -588,7 +588,7 @@ export default function BookingFlow() {
               {!form.room && (
                 <div className="text-center py-8">
                   <div className="text-4xl mb-4">🏨</div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">객실을 선택하세요</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">객실을 선택하세요</h3>
                   <p className="text-gray-600 text-sm">객실 선택 후 가격을 확인하실 수 있습니다</p>
                 </div>
               )}

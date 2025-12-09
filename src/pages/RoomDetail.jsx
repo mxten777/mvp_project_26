@@ -69,7 +69,7 @@ export default function RoomDetail() {
       <div className="min-h-[50vh] flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🏨</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">객실을 찾을 수 없습니다</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">객실을 찾을 수 없습니다</h2>
           <p className="text-gray-600 mb-6">요청하신 객실이 존재하지 않거나 삭제되었습니다.</p>
           <Link to="/rooms" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-xl font-semibold hover:bg-brand-secondary transition-colors">
             ← 객실 목록으로 돌아가기
@@ -130,7 +130,7 @@ export default function RoomDetail() {
           <div className="lg:col-span-2 space-y-12">
             {/* 객실 설명 */}
             <div className="bg-white rounded-3xl p-8 shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-xl flex items-center justify-center">
                   <span className="text-white text-xl">🏨</span>
                 </div>
@@ -143,7 +143,7 @@ export default function RoomDetail() {
 
             {/* 편의시설 */}
             <div className="bg-white rounded-3xl p-8 shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-brand-secondary to-brand-accent rounded-xl flex items-center justify-center">
                   <span className="text-white text-xl">✨</span>
                 </div>
@@ -166,7 +166,7 @@ export default function RoomDetail() {
                       {amenity.icon}
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-800">{amenity.title}</h3>
+                      <h3 className="font-bold text-gray-800 dark:text-white">{amenity.title}</h3>
                       <p className="text-sm text-gray-600">{amenity.desc}</p>
                     </div>
                   </div>
@@ -176,7 +176,7 @@ export default function RoomDetail() {
 
             {/* 고객 후기 */}
             <div className="bg-white rounded-3xl p-8 shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-brand-accent to-brand-gold rounded-xl flex items-center justify-center">
                   <span className="text-white text-xl">💬</span>
                 </div>
@@ -196,7 +196,7 @@ export default function RoomDetail() {
                           {review.name[0]}
                         </div>
                         <div>
-                          <h4 className="font-bold text-gray-800">{review.name}</h4>
+                          <h4 className="font-bold text-gray-800 dark:text-white">{review.name}</h4>
                           <div className="flex items-center text-brand-gold">
                             {'★'.repeat(review.rating)}
                           </div>
@@ -215,7 +215,7 @@ export default function RoomDetail() {
           <div className="lg:col-span-1">
             <div className="sticky top-8 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
               <div className="text-center mb-8">
-                <div className="text-4xl font-bold text-gray-800 mb-2">
+                <div className="text-4xl font-bold text-gray-800 dark:text-white mb-2">
                   ₩{room.price.toLocaleString()}
                 </div>
                 <div className="text-gray-600">1박 기준</div>

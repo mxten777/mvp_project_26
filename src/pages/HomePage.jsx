@@ -74,7 +74,7 @@ export default function HomePage() {
           {/* 🏆 프리미엄 타이틀 */}
           <FadeInUp delay={0.4}>
             <div className="relative mb-8">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-blue-200 mb-6 leading-tight tracking-tight">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black text-white drop-shadow-2xl mb-6 leading-tight tracking-tight">
                 Resort BAIKAL
               </h1>
               
@@ -326,7 +326,7 @@ export default function HomePage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">회원 서비스</h3>
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">회원 서비스</h3>
         <p className="text-gray-600 mb-6 leading-relaxed">회원가입하고 더 많은 혜택을 받으세요</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/login" className="bg-gradient-to-r from-brand-primary to-brand-secondary hover:from-brand-secondary hover:to-brand-primary text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">로그인</Link>
