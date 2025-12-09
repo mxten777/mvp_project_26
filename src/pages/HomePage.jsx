@@ -74,17 +74,18 @@ export default function HomePage() {
           {/* 🏆 프리미엄 타이틀 */}
           <FadeInUp delay={0.4}>
             <div className="relative mb-8">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black text-white mb-6 leading-tight tracking-tight" style={{
-                textShadow: '0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(147, 51, 234, 0.6), 0 4px 20px rgba(0, 0, 0, 0.9), 0 8px 40px rgba(0, 0, 0, 0.7)'
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black mb-6 leading-tight tracking-tight bg-gradient-to-r from-yellow-300 via-white to-yellow-300 bg-clip-text text-transparent" style={{
+                WebkitTextStroke: '2px rgba(255, 215, 0, 0.3)',
+                filter: 'drop-shadow(0 0 30px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.8)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9)) drop-shadow(0 8px 40px rgba(139, 69, 19, 0.6))'
               }}>
                 Resort BAIKAL
               </h1>
               
               {/* 언더라인 효과 */}
-              <div className="h-2 w-64 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent rounded-full shadow-[0_0_20px_rgba(250,204,21,0.8)]"></div>
+              <div className="h-2 w-64 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent rounded-full shadow-[0_0_30px_rgba(250,204,21,1)]"></div>
               
               {/* 강화된 글로우 효과 */}
-              <div className="absolute -inset-8 bg-gradient-to-r from-purple-500/40 via-blue-500/40 to-purple-500/40 blur-3xl animate-pulse"></div>
+              <div className="absolute -inset-8 bg-gradient-to-r from-yellow-500/30 via-orange-500/30 to-yellow-500/30 blur-3xl animate-pulse"></div>
             </div>
           </FadeInUp>
 
