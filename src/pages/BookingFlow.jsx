@@ -119,47 +119,81 @@ export default function BookingFlow() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 pb-20">
-        {/* 프리미엄 프로그레스 바 */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
+        {/* 💎 초프리미엄 프로그레스 바 with 애니메이션 */}
+        <div className="mb-16">
+          <div className="relative flex items-center justify-between">
             {[
               { num: 1, title: "날짜 & 인원", icon: "📅" },
               { num: 2, title: "객실 선택", icon: "🏨" },
               { num: 3, title: "고객 정보", icon: "👤" },
               { num: 4, title: "예약 완료", icon: "✨" }
             ].map((item, index) => (
-              <div key={item.num} className="flex flex-col items-center relative">
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300 ${
+              <div key={item.num} className="flex flex-col items-center relative z-10">
+                <div className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold transition-all duration-500 ${
                   step >= item.num 
-                    ? 'bg-gradient-to-br from-brand-gold to-brand-accent text-white shadow-lg transform scale-110' 
-                    : 'bg-gray-200 text-gray-400'
+                    ? 'bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 text-white shadow-2xl transform scale-110' 
+                    : 'bg-white border-2 border-gray-300 text-gray-400'
                 }`}>
-                  {step > item.num ? '✓' : item.icon}
+                  {step > item.num ? (
+                    <span className="animate-pulse">✓</span>
+                  ) : (
+                    item.icon
+                  )}
+                  
+                  {/* 활성화된 단계에만 펄스 링 효과 */}
+                  {step === item.num && (
+                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-75"></span>
+                  )}
                 </div>
-                <div className={`mt-3 text-sm font-semibold transition-colors ${
-                  step >= item.num ? 'text-brand-primary' : 'text-gray-400'
+                
+                <div className={`mt-4 text-xs sm:text-sm font-bold transition-all duration-300 ${
+                  step >= item.num ? 'text-purple-600' : 'text-gray-400'
                 }`}>
                   {item.title}
                 </div>
+                
+                {/* 연결선 - 최대 넓이 제한 */}
                 {index < 3 && (
-                  <div className={`absolute top-8 left-16 w-20 h-1 transition-colors ${
-                    step > item.num ? 'bg-gradient-to-r from-brand-gold to-brand-accent' : 'bg-gray-200'
-                  }`} style={{ width: 'calc(100vw / 4 - 4rem)', maxWidth: '120px' }}></div>
+                  <div className="absolute top-8 sm:top-10 left-1/2 flex items-center" style={{ width: 'calc(100vw / 4 - 2rem)', maxWidth: '150px' }}>
+                    <div className={`h-1 w-full rounded-full transition-all duration-500 ${
+                      step > item.num 
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-600' 
+                        : 'bg-gray-300'
+                    }`}></div>
+                  </div>
                 )}
               </div>
             ))}
           </div>
+          
+          {/* 진행률 표시 */}
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full">
+              <span className="text-sm font-semibold text-purple-600">
+                진행률: {Math.round((step / 4) * 100)}%
+              </span>
+              <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-500"
+                  style={{ width: `${(step / 4) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* 메인 폼 영역 */}
-          <div className="lg:col-span-2 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100"
+          {/* 메인 폼 영역 - 슬라이드 애니메이션 */}
+          <div className="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100 overflow-hidden"
                style={{ minHeight: '500px' }}>
             {step === 1 && (
-              <div className="space-y-8">
+              <div className="space-y-8 animate-slide-in">
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">날짜 및 인원 선택</h2>
-                  <p className="text-gray-600">투숙 날짜와 인원을 선택해주세요</p>
+                  <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
+                    <span className="text-4xl">📅</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">날짜 및 인원 선택</h2>
+                  <p className="text-gray-600">완벽한 휴식을 위한 첫걸음</p>
                 </div>
 
                 <div className="space-y-6">
@@ -219,10 +253,13 @@ export default function BookingFlow() {
               </div>
             )}
             {step === 2 && (
-              <div className="space-y-8">
+              <div className="space-y-8 animate-slide-in">
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">객실 선택</h2>
-                  <p className="text-gray-600">원하시는 객실 타입을 선택해주세요</p>
+                  <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
+                    <span className="text-4xl">🏨</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">객실 선택</h2>
+                  <p className="text-gray-600">럭셔리 객실을 선택해보세요</p>
                 </div>
 
                 <div className="space-y-4">
@@ -301,10 +338,13 @@ export default function BookingFlow() {
               </div>
             )}
             {step === 3 && (
-              <div className="space-y-8">
+              <div className="space-y-8 animate-slide-in">
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">고객 정보 입력</h2>
-                  <p className="text-gray-600">예약 확인을 위한 정보를 입력해주세요</p>
+                  <div className="inline-block p-4 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mb-4">
+                    <span className="text-4xl">👤</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-black text-gray-800 mb-2">고객 정보 입력</h2>
+                  <p className="text-gray-600">예약 확정을 위한 마지막 단계</p>
                 </div>
 
                 <div className="space-y-6">

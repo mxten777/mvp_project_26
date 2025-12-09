@@ -1,6 +1,5 @@
 // 📱 모바일 반응형 유틸리티 - 디바이스별 최적화 컴포넌트
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 // 🔍 디바이스 감지 훅
 export const useDeviceType = () => {

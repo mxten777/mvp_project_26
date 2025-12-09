@@ -1,6 +1,6 @@
 // 📊 성능 모니터링 시스템 - Web Vitals & 실시간 성능 추적
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const PerformanceMonitor = ({ showMetrics = false }) => {
   const [metrics, setMetrics] = useState({

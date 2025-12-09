@@ -1,6 +1,6 @@
 // ⚡ 지연 로딩 유틸리티 - 코드 분할 및 성능 최적화
-import { lazy, Suspense, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Suspense, useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { PremiumLoader } from './LoadingAnimations';
 
 // 🎯 지연 로딩 컴포넌트 래퍼

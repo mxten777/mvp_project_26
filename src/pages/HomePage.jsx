@@ -7,106 +7,145 @@ import { FadeInUp, ScaleIn, HoverScale, HoverFloat } from '../components/PageTra
 export default function HomePage() {
   return (
     <Layout>
-      {/* 프리미엄 히어로 섹션 */}
-      <div className="relative min-h-[80vh] flex flex-col items-center justify-center overflow-hidden rounded-3xl mx-auto max-w-6xl mb-16">
-        {/* 동적 배경 레이어 */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent opacity-90"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-brand-gold/20 to-transparent animate-pulse"></div>
-        
-        {/* 파티클 효과 배경 */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-bounce delay-100"></div>
-          <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-brand-gold/40 rounded-full animate-bounce delay-300"></div>
-          <div className="absolute bottom-1/4 left-3/4 w-1 h-1 bg-white/50 rounded-full animate-bounce delay-500"></div>
-          <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-brand-accent/30 rounded-full animate-bounce delay-700"></div>
+      {/* 🌟 프리미엄 3D 히어로 섹션 */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 mb-20">
+        {/* 🎨 애니메이션 배경 레이어 */}
+        <div className="absolute inset-0 opacity-40">
+          {/* 그라데이션 오버레이 */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-blue-600/20 to-purple-900/30"></div>
+          
+          {/* 움직이는 라이트 효과 */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div className="absolute top-1/3 -right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+          </div>
         </div>
 
-        {/* 메인 콘텐츠 */}
-        <div className="relative z-10 text-center px-6 py-20">
-          {/* 프리미엄 로고/아이콘 */}
+        {/* ✨ 고급 파티클 효과 */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute bg-white rounded-full animate-float"
+              style={{
+                width: `${Math.random() * 4 + 1}px`,
+                height: `${Math.random() * 4 + 1}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                opacity: Math.random() * 0.5 + 0.2,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${Math.random() * 3 + 2}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* 🎯 메인 콘텐츠 */}
+        <div className="relative z-10 text-center px-6 py-20 max-w-6xl mx-auto">
+          {/* 프리미엄 로고 아이콘 */}
           <FadeInUp delay={0.2}>
-            <div className="mb-8 relative">
+            <div className="mb-12 relative">
               <HoverFloat>
-                <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl mb-6 mx-auto border border-white/20 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/20 to-transparent"></div>
-                  <svg width="48" height="48" fill="none" viewBox="0 0 24 24" className="relative z-10">
-                    <path d="M12 2L3.09 8.26V16H21V8.26L12 2Z" fill="url(#gradient1)" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                    <path d="M8 12H16M12 8V16" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <div className="w-32 h-32 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl flex items-center justify-center shadow-2xl mb-8 mx-auto border border-white/20 relative overflow-hidden group">
+                  {/* 글로우 효과 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-blue-500/30 group-hover:from-purple-400/40 group-hover:to-blue-400/40 transition-all duration-500"></div>
+                  
+                  {/* 회전하는 링 */}
+                  <div className="absolute inset-2 border-2 border-white/20 rounded-3xl animate-spin-slow"></div>
+                  
+                  {/* 아이콘 */}
+                  <svg width="64" height="64" fill="none" viewBox="0 0 24 24" className="relative z-10 drop-shadow-2xl">
                     <defs>
-                  <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FFD700"/>
-                    <stop offset="100%" stopColor="#FFA500"/>
-                  </linearGradient>
-                </defs>
+                      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{stopColor: '#FFD700', stopOpacity: 1}} />
+                        <stop offset="50%" style={{stopColor: '#FFA500', stopOpacity: 1}} />
+                        <stop offset="100%" style={{stopColor: '#FF6B6B', stopOpacity: 1}} />
+                      </linearGradient>
+                    </defs>
+                    <path d="M12 2L3.09 8.26V16H21V8.26L12 2Z" fill="url(#logoGradient)" stroke="white" strokeWidth="1" strokeLinejoin="round"/>
+                    <path d="M8 12H16M12 8V16" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
                   </svg>
                 </div>
               </HoverFloat>
             </div>
           </FadeInUp>
 
-          {/* 프리미엄 타이틀 */}
+          {/* 🏆 프리미엄 타이틀 */}
           <FadeInUp delay={0.4}>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-display font-black text-white mb-4 sm:mb-6 relative">
-              <ScrollText 
-                text="Resort BAIKAL"
-                className="bg-gradient-to-r from-white via-brand-gold to-white bg-clip-text text-transparent drop-shadow-2xl"
-              />
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-brand-accent/20 blur-xl opacity-30 animate-pulse"></div>
-            </h1>
+            <div className="relative mb-8">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-blue-200 mb-6 leading-tight tracking-tight">
+                Resort BAIKAL
+              </h1>
+              
+              {/* 언더라인 효과 */}
+              <div className="h-2 w-64 mx-auto bg-gradient-to-r from-transparent via-purple-500 to-transparent rounded-full opacity-60"></div>
+              
+              {/* 글로우 효과 */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 blur-3xl opacity-50 animate-pulse"></div>
+            </div>
           </FadeInUp>
 
-          {/* 프리미엄 서브타이틀 */}
+          {/* 💎 프리미엄 서브타이틀 */}
           <FadeInUp delay={0.6}>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 sm:mb-12 font-light max-w-4xl mx-auto leading-relaxed px-4">
-              <span className="font-medium text-brand-gold">세계 최고 수준</span>의 럭셔리 리조트 경험을 
+            <p className="text-xl sm:text-2xl md:text-3xl text-white/90 mb-12 font-light max-w-4xl mx-auto leading-relaxed px-4">
+              세계가 인정한 <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">럭셔리 리조트</span>의 품격
               <br className="hidden sm:block"/>
-              <span className="font-medium text-brand-gold">프리미엄 예약 시스템</span>으로 만나보세요
+              <span className="text-white/70 text-lg sm:text-xl mt-2 inline-block">바이칼 호수가 선사하는 특별한 휴식</span>
             </p>
           </FadeInUp>
 
-          {/* 프리미엄 CTA 버튼 */}
+          {/* 🎯 프리미엄 CTA 버튼 */}
           <FadeInUp delay={0.8}>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
-              <HoverScale scale={1.08}>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center px-4 mb-16">
+              <HoverScale scale={1.05}>
                 <Link 
                   to="/booking" 
-                  className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold text-white bg-gradient-to-r from-brand-gold to-brand-accent rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 overflow-hidden border border-white/20"
+                  className="group relative inline-flex items-center justify-center w-full sm:w-auto px-10 sm:px-14 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-size-200 bg-pos-0 hover:bg-pos-100 rounded-2xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-500 transform hover:scale-105 overflow-hidden border border-white/20"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  {/* 반짝이는 효과 */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  
                   <span className="relative flex items-center gap-3">
-                    ✨ 지금 예약하기
-                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300">
+                    <span className="text-2xl">✨</span>
+                    <span>지금 예약하기</span>
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="group-hover:translate-x-2 transition-transform duration-300">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </span>
                 </Link>
               </HoverScale>
               
-              <HoverScale scale={1.05}>
+              <HoverScale scale={1.03}>
                 <Link 
                   to="/rooms" 
-                  className="group inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white bg-white/10 backdrop-blur-md rounded-2xl border border-white/30 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+                  className="group inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 text-lg sm:text-xl font-semibold text-white bg-white/10 backdrop-blur-xl rounded-2xl border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 >
-                  <span className="flex items-center gap-2">
-                    🏨 객실 둘러보기
+                  <span className="flex items-center gap-3">
+                    <span className="text-2xl">🏨</span>
+                    <span>객실 둘러보기</span>
                   </span>
                 </Link>
               </HoverScale>
             </div>
           </FadeInUp>
 
-          {/* 프리미엄 특징 뱃지 */}
+          {/* 🌟 프리미엄 특징 뱃지 */}
           <FadeInUp delay={1.0}>
-            <div className="flex flex-wrap justify-center gap-4 mt-12">
+            <div className="flex flex-wrap justify-center gap-4">
               {[
-                { icon: "⭐", text: "5성급 서비스" },
-                { icon: "🌊", text: "바이칼 호수 전망" },
-                { icon: "🎯", text: "즉시 예약 확정" }
+                { icon: "⭐", text: "5성급 럭셔리", gradient: "from-yellow-400 to-orange-500" },
+                { icon: "🌊", text: "바이칼 오션뷰", gradient: "from-blue-400 to-cyan-500" },
+                { icon: "🎯", text: "즉시 예약 확정", gradient: "from-purple-400 to-pink-500" },
+                { icon: "💎", text: "프리미엄 서비스", gradient: "from-indigo-400 to-purple-500" }
               ].map((badge, index) => (
                 <ScaleIn key={index} delay={1.2 + index * 0.1}>
-                  <HoverFloat y={-5}>
-                    <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm border border-white/20 hover:bg-white/20 transition-all duration-300">
-                      {badge.icon} {badge.text}
+                  <HoverFloat y={-8}>
+                    <div className={`group px-6 py-3 bg-gradient-to-r ${badge.gradient} rounded-full text-white font-bold text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20 backdrop-blur-sm`}>
+                      <span className="flex items-center gap-2">
+                        <span className="text-lg">{badge.icon}</span>
+                        <span>{badge.text}</span>
+                      </span>
                     </div>
                   </HoverFloat>
                 </ScaleIn>
@@ -115,11 +154,35 @@ export default function HomePage() {
           </FadeInUp>
         </div>
 
+        {/* 📊 통계 카운터 */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { number: "10K+", label: "만족한 고객" },
+              { number: "5★", label: "고객 평점" },
+              { number: "200+", label: "럭셔리 객실" },
+              { number: "24/7", label: "고객 지원" }
+            ].map((stat, index) => (
+              <ScrollReveal key={index} className="text-center">
+                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
+                  <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {stat.number}
+                  </div>
+                  <div className="text-white/80 text-sm font-medium">{stat.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+
         {/* 하단 스크롤 인디케이터 */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="flex flex-col items-center gap-2 text-white/60 animate-bounce">
+            <span className="text-xs font-medium uppercase tracking-wider">Scroll Down</span>
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
       </div>
 

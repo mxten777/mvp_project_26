@@ -3,7 +3,7 @@ import { useTheme, THEMES } from '../contexts/ThemeContext';
 
 // 🌙 프리미엄 테마 토글 컴포넌트
 const PremiumThemeToggle = ({ className = "", showLabel = true, size = "md" }) => {
-  const { themeMode, currentTheme, toggleTheme, isDark, isAuto } = useTheme();
+  const { themeMode, toggleTheme, isDark, isAuto } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
 
   // 크기별 스타일 정의

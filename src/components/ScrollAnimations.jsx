@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
 
 // 📜 스크롤 기반 애니메이션 컴포넌트들

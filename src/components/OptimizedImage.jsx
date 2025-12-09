@@ -1,6 +1,5 @@
 // 🖼️ 이미지 최적화 컴포넌트 - 지연 로딩 및 WebP 지원
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 const OptimizedImage = ({ 
   src, 

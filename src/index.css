@@ -51,25 +51,53 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1.6;
   letter-spacing: -0.01em;
 }
 
+/* 다크모드 전환 */
+.dark body {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a0b2e 50%, #2d1b69 100%);
+  color: #f8f9ff;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #f8f9ff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dark a {
+  color: #ffd60a;
+}
+
+.dark a:hover {
+  color: #f72585;
+}
+
+/* 카드 다크모드 스타일 */
+.dark .bg-white {
+  background: rgba(30, 30, 60, 0.8);
+  border-color: rgba(114, 9, 183, 0.2);
+}
+
+.dark .bg-gray-50 {
+  background: rgba(20, 20, 40, 0.6);
+}
+
+.dark .bg-gray-100 {
+  background: rgba(40, 40, 80, 0.5);
+}
+
+.dark .border-gray-200 {
+  border-color: rgba(114, 9, 183, 0.3);
+}
+
+/* 시스템 다크모드 지원 */
 @media (prefers-color-scheme: dark) {
-  body {
+  body:not(.light) {
     background: var(--gradient-dark);
     color: var(--brand-pearl);
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--brand-pearl);
-    text-shadow: 0 2px 4px rgb(0 0 0 / 0.3);
-  }
-  a {
-    color: var(--brand-gold);
-  }
-  a:hover {
-    color: var(--brand-accent);
   }
 }
 
@@ -522,3 +550,127 @@ button:active {
     filter: drop-shadow(0 20px 40px rgba(247, 37, 133, 0.3));
   }
 }
+
+/* 🌟 프리미엄 애니메이션 추가 */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(50px, 50px) scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* 배경 애니메이션 */
+.bg-size-200 {
+  background-size: 200% 100%;
+}
+
+.bg-pos-0 {
+  background-position: 0% 50%;
+}
+
+.bg-pos-100 {
+  background-position: 100% 50%;
+}
+
+/* 호버 효과 최적화 */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* 슬라이드 애니메이션 */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 예약 플로우 단계 전환 애니메이션 */
+@keyframes slide-in {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 반짝이는 shimmer 효과 */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+

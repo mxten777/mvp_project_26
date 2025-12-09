@@ -5,7 +5,7 @@ import { db } from '../config/firebase';
 import { useAppContext } from '../context/useAppContext';
 
 export function useRoomsApi() {
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
 
   useEffect(() => {
     async function fetchRooms() {
