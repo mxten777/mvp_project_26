@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function ResortIntro() {
   return (
     <Layout>
-      <section className="relative w-full min-h-[320px] flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-purple-100 via-white to-purple-200 rounded-xl shadow-lg p-6 md:p-12 mb-8 overflow-hidden">
+      <section data-has-hero="true" className="relative w-full min-h-[320px] flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-purple-100 via-white to-purple-200 rounded-xl shadow-lg p-6 md:p-12 mb-8 overflow-hidden">
         <div className="flex-1 z-10">
           <h2 className="text-3xl md:text-4xl font-extrabold text-purple-800 mb-4 drop-shadow">Resort BAIKAL</h2>
           <p className="text-lg text-gray-700 mb-6">세계에서 가장 깊고 맑은 바이칼 호수의 품에 안긴, 자연과 휴식이 공존하는 프리미엄 리조트.<br className="hidden md:block"/> 가족, 연인, 친구 모두를 위한 최고의 힐링 공간을 경험하세요.</p>

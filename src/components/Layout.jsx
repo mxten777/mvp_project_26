@@ -221,7 +221,7 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
 
       {/* 프리미엄 본문 콘텐츠 */}
       <main 
-        className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10" 
+        className={`${location.pathname !== '/' ? 'pt-header' : ''} flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10`} 
         role="main" 
         aria-label="메인 콘텐츠"
       >

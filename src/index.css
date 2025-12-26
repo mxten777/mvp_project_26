@@ -720,6 +720,11 @@ button:active {
   padding-top: var(--app-header-h);
 }
 
+/* utility class for non-home pages to reserve header height */
+.pt-header {
+  padding-top: var(--app-header-h);
+}
+
 /* Improve anchor/link navigation for headings within hero-handled sections */
 [data-has-hero] :where(h1,h2,h3,h4,h5,h6) {
   scroll-margin-top: calc(var(--app-header-h) + 8px);
