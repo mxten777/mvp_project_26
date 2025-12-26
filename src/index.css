@@ -683,3 +683,38 @@ button:active {
   animation: shimmer 2s infinite;
 }
 
+
+/* KETRI UI Standard v1.0 - hero & header handling
+   Rely on CSS-only offset handling. Do NOT change --app-header-h value.
+   Home page uses data-hero-bleed, other top sections use data-has-hero.
+*/
+
+/* Ensure header respects token height */
+.app-header {
+  height: var(--app-header-h);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.app-header .app-header-inner {
+  min-height: var(--app-header-h);
+  display: flex;
+  align-items: center;
+}
+
+/* Sections that sit below a fixed header should add this attribute */
+[data-has-hero] {
+  padding-top: var(--app-header-h);
+}
+
+/* Home-only: hero should bleed under the header */
+[data-hero-bleed] {
+  margin-top: calc(var(--app-header-h) * -1);
+  padding-top: 0;
+}
+
+/* Improve anchor/link navigation for headings within hero-handled sections */
+[data-has-hero] :where(h1,h2,h3,h4,h5,h6) {
+  scroll-margin-top: calc(var(--app-header-h) + 8px);
+}
+

@@ -9,12 +9,8 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // 페이지 전환 시 즉시 상단으로 스크롤
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' // 부드러운 스크롤 대신 즉시 이동
-    });
+    // KETRI standard: remove JS-based scroll offset/scrollTo logic
+    // rely on CSS data-has-hero / :target rules instead
   }, [pathname]);
 
   return null; // 렌더링할 UI 없음
