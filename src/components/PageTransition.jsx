@@ -8,31 +8,20 @@ const PageTransition = ({ children }) => {
 
   // 페이지별 전환 애니메이션 설정
   const pageVariants = {
-    initial: {
-      opacity: 0,
-      scale: 0.95,
-      y: 20,
-      filter: 'blur(10px)'
-    },
+    initial: { opacity: 0 },
     in: {
       opacity: 1,
-      scale: 1,
-      y: 0,
-      filter: 'blur(0px)',
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        staggerChildren: 0.1
+        duration: 0.45,
+        ease: 'easeOut',
+        staggerChildren: 0.08
       }
     },
     out: {
       opacity: 0,
-      scale: 1.05,
-      y: -20,
-      filter: 'blur(5px)',
       transition: {
-        duration: 0.4,
-        ease: [0.55, 0.055, 0.675, 0.19]
+        duration: 0.25,
+        ease: 'easeIn'
       }
     }
   };
@@ -41,67 +30,28 @@ const PageTransition = ({ children }) => {
   const getPageSpecificAnimation = (pathname) => {
     if (pathname === '/') {
       return {
-        initial: { opacity: 0, scale: 0.9, rotateX: 10 },
+        initial: { opacity: 0 },
         in: { 
-          opacity: 1, 
-          scale: 1, 
-          rotateX: 0,
-          transition: { 
-            duration: 0.8, 
-            ease: 'easeOut',
-            staggerChildren: 0.15
-          }
+          opacity: 1,
+          transition: { duration: 0.6, ease: 'easeOut', staggerChildren: 0.15 }
         },
-        out: { 
-          opacity: 0, 
-          scale: 1.1, 
-          rotateX: -5,
-          transition: { duration: 0.5 }
-        }
+        out: { opacity: 0, transition: { duration: 0.4 } }
       };
     }
     
     if (pathname.includes('/admin')) {
       return {
-        initial: { opacity: 0, x: 50, scale: 0.95 },
-        in: { 
-          opacity: 1, 
-          x: 0, 
-          scale: 1,
-          transition: { 
-            duration: 0.7, 
-            ease: [0.25, 0.46, 0.45, 0.94],
-            staggerChildren: 0.1
-          }
-        },
-        out: { 
-          opacity: 0, 
-          x: -30, 
-          scale: 1.02,
-          transition: { duration: 0.4 }
-        }
+        initial: { opacity: 0 },
+        in: { opacity: 1, transition: { duration: 0.5, ease: 'easeOut', staggerChildren: 0.08 } },
+        out: { opacity: 0, transition: { duration: 0.3 } }
       };
     }
 
     if (pathname.includes('/booking')) {
       return {
-        initial: { opacity: 0, y: 30, scale: 0.98 },
-        in: { 
-          opacity: 1, 
-          y: 0, 
-          scale: 1,
-          transition: { 
-            duration: 0.6, 
-            ease: 'easeOut',
-            staggerChildren: 0.08
-          }
-        },
-        out: { 
-          opacity: 0, 
-          y: -20, 
-          scale: 1.02,
-          transition: { duration: 0.3 }
-        }
+        initial: { opacity: 0 },
+        in: { opacity: 1, transition: { duration: 0.45, ease: 'easeOut', staggerChildren: 0.06 } },
+        out: { opacity: 0, transition: { duration: 0.25 } }
       };
     }
 

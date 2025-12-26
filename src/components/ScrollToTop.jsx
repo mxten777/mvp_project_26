@@ -10,11 +10,8 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     // 페이지 전환 시 즉시 상단으로 스크롤
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' // 부드러운 스크롤 대신 즉시 이동
-    });
+    // 즉시 상단으로 이동 (애니메이션 없음)
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null; // 렌더링할 UI 없음

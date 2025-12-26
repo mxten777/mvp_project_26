@@ -552,7 +552,7 @@ export default function AdminDashboard() {
                 <Link 
                   to="/admin/rooms" 
                   className="group block p-6 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-2xl hover:shadow-emerald-500/50 transform hover:scale-105 hover:-rotate-1 duration-300 relative overflow-hidden"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
@@ -565,7 +565,7 @@ export default function AdminDashboard() {
                 <Link 
                   to="/admin/reservations" 
                   className="group block p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl hover:from-blue-600 hover:to-blue-700 transition-all shadow-2xl hover:shadow-blue-500/50 transform hover:scale-105 hover:rotate-1 duration-300 relative overflow-hidden"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
@@ -578,7 +578,7 @@ export default function AdminDashboard() {
                 <Link 
                   to="/admin/reviews" 
                   className="group block p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl hover:from-purple-600 hover:to-purple-700 transition-all shadow-2xl hover:shadow-purple-500/50 transform hover:scale-105 hover:-rotate-1 duration-300 relative overflow-hidden"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
@@ -591,7 +591,7 @@ export default function AdminDashboard() {
                 <Link 
                   to="/admin/users" 
                   className="group block p-6 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-2xl hover:shadow-orange-500/50 transform hover:scale-105 hover:rotate-1 duration-300 relative overflow-hidden"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <div className="relative z-10">
