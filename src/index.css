@@ -716,8 +716,8 @@ button:active {
 
 /* Home-only: hero should bleed under the header */
 [data-hero-bleed] {
-  margin-top: calc(var(--app-header-h) * -1);
-  padding-top: 0;
+  /* Ensure Home hero content begins below the fixed header without negative margins */
+  padding-top: var(--app-header-h);
 }
 
 /* Improve anchor/link navigation for headings within hero-handled sections */
