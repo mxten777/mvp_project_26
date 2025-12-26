@@ -14,16 +14,8 @@ const navs = [
 const MainNav = React.memo(function MainNav() {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  // 스크롤 감지
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // KETRI: remove scroll-based header/background toggling to keep header static
 
   // 키보드 접근성: ESC로 메뉴 닫기
   const handleKeyDown = (e) => {
@@ -34,11 +26,7 @@ const MainNav = React.memo(function MainNav() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
-        scrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-xl' 
-          : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg'
-      } border-b border-gray-200/50 dark:border-gray-700/50`}
+      className={`z-50 w-full transition-colors duration-300 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-xl border-b border-gray-200/50 dark:border-gray-700/50`}
       role="navigation"
       aria-label="메인 내비게이션"
       tabIndex={0}

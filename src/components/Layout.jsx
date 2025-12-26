@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PremiumThemeToggle from './ThemeToggle';
 import { useTheme } from '../contexts/ThemeContext';
@@ -7,22 +7,13 @@ import { useTheme } from '../contexts/ThemeContext';
 const PremiumLayout = React.memo(function PremiumLayout({ children }) {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { isDark } = useTheme();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // 스크롤 감지 (헤더 스타일 변경)
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // KETRI: removed header scroll position logic to keep header fixed
 
   return (
     <div className={`min-h-screen flex flex-col font-sans relative overflow-x-hidden transition-all duration-500 ${
@@ -44,22 +35,10 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
         }`} style={{ animationDelay: '3s' }} />
       </div>
 
-      {/* 프리미엄 헤더 */}
-      <header 
-        className={`
-          w-full transition-all duration-500 z-40 relative app-header
-          ${isScrolled 
-            ? `glass-morphism border-b shadow-lg backdrop-blur-xl py-3 ${
-                isDark ? 'border-gray-700/50' : 'border-white/20'
-              }` 
-            : `shadow-2xl py-5 ${
-                isDark 
-                  ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-purple-900/30' 
-                  : 'bg-gradient-to-r from-brand-primary via-brand-secondary to-purple-900 shadow-brand-primary/30'
-              }`
-          }
-        `} 
-        role="banner" 
+      {/* 프리미엄 헤더 (fixed, non-animating) */}
+      <header
+        className={`w-full z-40 app-header glass-morphism border-b shadow-lg backdrop-blur-xl py-3 ${isDark ? 'border-gray-700/50 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900' : 'border-white/20 bg-gradient-to-r from-brand-primary via-brand-secondary to-purple-900'}`}
+        role="banner"
         aria-label="프리미엄 호텔 헤더"
       >
         {/* 럭셔리 장식 라인 */}

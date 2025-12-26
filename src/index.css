@@ -692,9 +692,16 @@ button:active {
 /* Ensure header respects token height */
 .app-header {
   height: var(--app-header-h);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transform: none !important;
+  will-change: auto !important;
+  /* Restrict transitions so height/padding/top/transform won't animate */
+  transition-property: background-color, box-shadow, color !important;
+  transition-duration: 200ms !important;
 }
 .app-header .app-header-inner {
   min-height: var(--app-header-h);
