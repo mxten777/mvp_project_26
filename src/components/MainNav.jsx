@@ -45,7 +45,7 @@ const MainNav = React.memo(function MainNav() {
       onKeyDown={handleKeyDown}
     >
       {/* 🎨 프리미엄 모바일 헤더 */}
-      <div className="sm:hidden flex items-center justify-between px-6 py-4">
+      <div className="sm:hidden flex items-center justify-between px-6 py-4 app-header-inner">
         {/* 로고 */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative">
@@ -77,7 +77,7 @@ const MainNav = React.memo(function MainNav() {
       </div>
 
       {/* 🖥️ 프리미엄 데스크탑 네비게이션 */}
-      <div className="hidden sm:block max-w-7xl mx-auto px-8 py-4">
+      <div className="hidden sm:block max-w-7xl mx-auto px-8 py-4 app-header-inner">
         <div className="flex items-center justify-between">
           {/* 로고 */}
           <Link to="/" className="flex items-center gap-4 group">

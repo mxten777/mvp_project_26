@@ -47,7 +47,7 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
       {/* 프리미엄 헤더 */}
       <header 
         className={`
-          w-full transition-all duration-500 z-40 relative
+          w-full transition-all duration-500 z-40 relative app-header
           ${isScrolled 
             ? `glass-morphism border-b shadow-lg backdrop-blur-xl py-3 ${
                 isDark ? 'border-gray-700/50' : 'border-white/20'
@@ -66,7 +66,7 @@ const PremiumLayout = React.memo(function PremiumLayout({ children }) {
         <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-brand-gold via-brand-accent to-brand-gold rounded-r-lg hidden md:block animate-pulse-glow" />
         <div className="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-brand-gold via-brand-accent to-brand-gold rounded-l-lg hidden md:block animate-pulse-glow" style={{ animationDelay: '1s' }} />
         
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between app-header-inner">
           {/* 로고 & 브랜드 */}
           <div className="flex items-center gap-4 relative z-10">
             <div className="relative">

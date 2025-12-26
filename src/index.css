@@ -42,6 +42,8 @@
   --blur-md: blur(8px);
   --blur-lg: blur(16px);
   --blur-xl: blur(24px);
+  /* KETRI required header token */
+  --app-header-h: 88px;
 }
 
 body {
@@ -658,6 +660,13 @@ button:active {
 
 .animate-slide-in {
   animation: slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* KETRI anchor handling: use header token for scroll offset */
+:root:target {}
+
+:target {
+  scroll-margin-top: var(--app-header-h);
 }
 
 /* 반짝이는 shimmer 효과 */

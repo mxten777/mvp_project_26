@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <Layout>
       {/* 🌟 프리미엄 3D 히어로 섹션 */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 mb-20">
+      <div data-hero-bleed="true" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 mb-20">
         {/* 🎨 애니메이션 배경 레이어 */}
         <div className="absolute inset-0 opacity-40">
           {/* 그라데이션 오버레이 */}

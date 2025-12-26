@@ -88,7 +88,7 @@ export default function RoomList() {
   return (
     <Layout>
       {/* 🌟 프리미엄 히어로 섹션 */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-24 mb-16">
+      <div data-has-hero="true" className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-24 mb-16">
         {/* 배경 효과 */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
