@@ -1,214 +1,176 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useTheme, THEMES } from '../contexts/ThemeContext';
 
-// 🌙 프리미엄 테마 토글 컴포넌트
-const PremiumThemeToggle = ({ className = "", showLabel = true, size = "md" }) => {
-  const { themeMode, toggleTheme, isDark, isAuto } = useTheme();
-  const [isAnimating, setIsAnimating] = useState(false);
+/* ─── SVG Icons ─── */
+const SunIcon = ({ className = '' }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+);
 
-  // 크기별 스타일 정의
-  const sizes = {
-    sm: "w-12 h-6",
-    md: "w-16 h-8", 
-    lg: "w-20 h-10"
-  };
+const MoonIcon = ({ className = '' }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+);
 
-  const iconSizes = {
-    sm: "text-xs",
-    md: "text-sm",
-    lg: "text-base"
-  };
+const AutoIcon = ({ className = '' }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 0 0 0 20z"/>
+  </svg>
+);
 
-  // 크기별 슬라이더 이동 거리 (완전히 보이도록 조정)
-  const translateValues = {
-    sm: isDark ? 'translate-x-7' : 'translate-x-0.5',  // 더 정확한 위치
-    md: isDark ? 'translate-x-8' : 'translate-x-0.5',  // 기본값 조정
-    lg: isDark ? 'translate-x-11' : 'translate-x-0.5'  // 더 넉넉한 공간
-  };
+const ChevronIcon = ({ className = '' }) => (
+  <svg className={className} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m6 9 6 6 6-6"/>
+  </svg>
+);
 
-  // 크기별 슬라이더 크기
-  const sliderSizes = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-8 h-8'
-  };
+/* ─── Theme Option Config ─── */
+const THEME_OPTIONS = [
+  { key: THEMES.LIGHT, label: '라이트', Icon: SunIcon },
+  { key: THEMES.DARK, label: '다크', Icon: MoonIcon },
+  { key: THEMES.AUTO, label: '자동', Icon: AutoIcon, hint: '시간 기반' },
+];
 
-  // 토글 애니메이션 처리
-  const handleToggle = () => {
-    setIsAnimating(true);
-    toggleTheme();
-    
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 300);
-  };
+/* ─── Premium Theme Toggle ─── */
+const PremiumThemeToggle = ({ className = '', showLabel = true, size = 'md' }) => {
+  const { themeMode, setTheme, toggleTheme, isDark, isAuto } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // 현재 시간 표시용
-  const [currentTime, setCurrentTime] = useState(new Date());
-  
+  // Close dropdown on outside click or Escape
+  const handleClose = useCallback(() => setIsOpen(false), []);
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, []);
+    if (!isOpen) return;
+    const handleOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) handleClose();
+    };
+    const handleEscape = (e) => { if (e.key === 'Escape') handleClose(); };
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, handleClose]);
 
-  // 테마별 아이콘과 색상
-  const getThemeIcon = () => {
-    if (isAuto) {
-      return isDark ? '🌙' : '🌞';
-    }
-    return isDark ? '🌙' : '🌞';
-  };
+  // Size variants
+  const toggle = {
+    sm: { track: 'w-11 h-6', dot: 'w-4 h-4', move: isDark ? 'translate-x-[22px]' : 'translate-x-[2px]' },
+    md: { track: 'w-14 h-7', dot: 'w-5 h-5', move: isDark ? 'translate-x-[30px]' : 'translate-x-[2px]' },
+    lg: { track: 'w-16 h-8', dot: 'w-6 h-6', move: isDark ? 'translate-x-[34px]' : 'translate-x-[2px]' },
+  }[size];
 
-  const getThemeLabel = () => {
-    if (isAuto) {
-      return `자동 (${isDark ? '다크' : '라이트'})`;
-    }
+  const getLabel = () => {
+    if (isAuto) return `자동 (${isDark ? '다크' : '라이트'})`;
     return isDark ? '다크 모드' : '라이트 모드';
   };
 
   return (
-    <div className={`flex items-center space-x-3 ${className}`}>
-      {/* 토글 스위치 */}
+    <div className={`flex items-center gap-2 ${className}`} ref={dropdownRef}>
+      {/* Toggle switch */}
       <button
-        onClick={handleToggle}
+        onClick={toggleTheme}
         className={`
-          relative inline-flex items-center justify-between
-          ${sizes[size]} rounded-full
-          transition-all duration-300 ease-in-out
-          ${isDark 
-            ? 'bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg shadow-purple-500/25' 
-            : 'bg-gradient-to-r from-amber-400 to-orange-500 shadow-lg shadow-orange-500/25'
-          }
-          hover:scale-105 active:scale-95
-          ${isAnimating ? 'animate-pulse' : ''}
+          relative inline-flex items-center ${toggle.track} rounded-full transition-colors duration-300
+          ${isDark
+            ? 'bg-brand-600 shadow-sm shadow-brand-500/30'
+            : 'bg-amber-400 shadow-sm shadow-amber-400/30'
+          } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2
         `}
-        aria-label={`현재 ${getThemeLabel()}, 클릭하여 변경`}
+        role="switch"
+        aria-checked={isDark}
+        aria-label={`현재 ${getLabel()}, 클릭하여 변경`}
       >
-        {/* 배경 패턴 */}
-        <div className="absolute inset-0 rounded-full opacity-20">
-          <div className={`w-full h-full rounded-full ${
-            isDark 
-              ? 'bg-gradient-to-r from-purple-400 to-pink-400' 
-              : 'bg-gradient-to-r from-yellow-300 to-amber-300'
-          }`}></div>
-        </div>
+        <span
+          className={`
+            ${toggle.dot} rounded-full bg-white shadow-md flex items-center justify-center
+            transition-transform duration-300 ease-out ${toggle.move}
+          `}
+        >
+          {isDark
+            ? <MoonIcon className="w-3 h-3 text-brand-600" />
+            : <SunIcon className="w-3 h-3 text-amber-500" />
+          }
+        </span>
 
-        {/* 슬라이더 */}
-        <div className={`
-          absolute ${sliderSizes[size]} bg-white rounded-full shadow-lg
-          flex items-center justify-center
-          transition-all duration-300 ease-in-out
-          ${translateValues[size]}
-        `}>
-          <span className={`${iconSizes[size]} transition-transform duration-300 ${
-            isAnimating ? 'rotate-180' : ''
-          }`}>
-            {getThemeIcon()}
-          </span>
-        </div>
-
-        {/* 자동 모드 표시 */}
+        {/* Auto mode indicator */}
         {isAuto && (
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full animate-pulse">
-            <div className="absolute inset-0 bg-emerald-400 rounded-full animate-ping"></div>
-          </div>
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-gray-900" />
         )}
       </button>
 
-      {/* 라벨 표시 */}
+      {/* Label */}
       {showLabel && (
-        <div className="flex flex-col">
-          <span className={`text-sm font-semibold transition-colors duration-200 ${
-            isDark ? 'text-gray-200' : 'text-gray-700'
-          }`}>
-            {getThemeLabel()}
-          </span>
-          
-          {/* 자동 모드일 때 시간 표시 */}
-          {isAuto && (
-            <span className={`text-xs opacity-75 transition-colors duration-200 ${
-              isDark ? 'text-gray-400' : 'text-gray-500'
-            }`}>
-              {currentTime.toLocaleTimeString('ko-KR', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-              })}
-            </span>
-          )}
-        </div>
+        <span className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          {getLabel()}
+        </span>
       )}
 
-      {/* 테마 선택 드롭다운 (고급 기능) */}
-      <div className="relative group">
-        <button className={`
-          p-2 rounded-lg transition-all duration-200
-          ${isDark 
-            ? 'text-gray-300 hover:text-white hover:bg-gray-700' 
-            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-          }
-        `}>
-          ⚙️
+      {/* Dropdown trigger */}
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          className={`
+            p-1.5 rounded-lg transition-colors duration-200
+            ${isDark
+              ? 'text-gray-400 hover:text-white hover:bg-white/10'
+              : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500
+          `}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-label="테마 선택 메뉴"
+        >
+          <ChevronIcon className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
         </button>
-        
-        {/* 드롭다운 메뉴 */}
-        <div className={`
-          absolute right-0 top-full mt-2 w-48 rounded-xl shadow-2xl
-          opacity-0 invisible group-hover:opacity-100 group-hover:visible
-          transition-all duration-200 transform translate-y-2 group-hover:translate-y-0
-          ${isDark 
-            ? 'bg-gray-800 border border-gray-600' 
-            : 'bg-white border border-gray-200'
-          }
-          z-50
-        `}>
-          <div className="p-2">
-            {Object.values(THEMES).map((theme) => (
-              <button
-                key={theme}
-                onClick={() => {
-                  setIsAnimating(true);
-                  setTimeout(() => {
-                    // setTheme 함수를 사용해야 함
-                    setIsAnimating(false);
-                  }, 300);
-                }}
-                className={`
-                  w-full flex items-center space-x-3 px-3 py-2 rounded-lg
-                  transition-all duration-200 text-left
-                  ${themeMode === theme
-                    ? (isDark 
-                        ? 'bg-purple-600 text-white' 
-                        : 'bg-blue-100 text-blue-900'
-                      )
-                    : (isDark 
-                        ? 'text-gray-300 hover:bg-gray-700 hover:text-white' 
-                        : 'text-gray-700 hover:bg-gray-100'
-                      )
-                  }
-                `}
-              >
-                <span>
-                  {theme === THEMES.LIGHT ? '🌞' : 
-                   theme === THEMES.DARK ? '🌙' : '🔄'}
-                </span>
-                <span className="text-sm font-medium">
-                  {theme === THEMES.LIGHT ? '라이트 모드' :
-                   theme === THEMES.DARK ? '다크 모드' : '자동 모드'}
-                </span>
-                {theme === THEMES.AUTO && (
-                  <span className={`text-xs ml-auto ${
-                    isDark ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                    시간 기반
-                  </span>
-                )}
-              </button>
-            ))}
+
+        {/* Dropdown menu */}
+        {isOpen && (
+          <div
+            className={`
+              absolute right-0 top-full mt-2 w-44 rounded-xl shadow-elevation-3 overflow-hidden
+              border backdrop-blur-xl z-50
+              ${isDark ? 'bg-gray-800/95 border-gray-700' : 'bg-white/95 border-gray-200'}
+            `}
+            role="listbox"
+            aria-label="테마 선택"
+          >
+            <div className="p-1.5">
+              {THEME_OPTIONS.map(({ key, label, Icon, hint }) => (
+                <button
+                  key={key}
+                  role="option"
+                  aria-selected={themeMode === key}
+                  onClick={() => {
+                    setTheme(key);
+                    setIsOpen(false);
+                  }}
+                  className={`
+                    w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors duration-150
+                    ${themeMode === key
+                      ? isDark ? 'bg-brand-600/30 text-brand-300' : 'bg-brand-50 text-brand-700'
+                      : isDark ? 'text-gray-300 hover:bg-white/5' : 'text-gray-700 hover:bg-gray-50'
+                    }
+                  `}
+                >
+                  <Icon className={`w-4 h-4 flex-shrink-0 ${themeMode === key ? (isDark ? 'text-brand-400' : 'text-brand-600') : ''}`} />
+                  <span className="text-sm font-medium flex-1">{label}</span>
+                  {hint && (
+                    <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{hint}</span>
+                  )}
+                  {themeMode === key && (
+                    <svg className={`w-4 h-4 ${isDark ? 'text-brand-400' : 'text-brand-600'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

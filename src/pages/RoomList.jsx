@@ -98,7 +98,7 @@ export default function RoomList() {
         <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
           <FadeInUp>
             <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-xl rounded-full text-sm font-semibold mb-6 border border-white/20">
-              ✨ 프리미엄 객실 컬렉션
+              프리미엄 객실 컬렉션
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-black mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-blue-200">
@@ -152,7 +152,8 @@ export default function RoomList() {
                     <img 
                       src={room.img} 
                       alt={room.name} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     
@@ -172,7 +173,7 @@ export default function RoomList() {
 
                     {/* 평점 */}
                     <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-2 rounded-full">
-                      <span className="text-yellow-400 text-lg">★</span>
+                      <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                       <span className="text-white font-bold">{room.rating}</span>
                       <span className="text-white/70 text-sm">({room.reviews})</span>
                     </div>
@@ -246,7 +247,7 @@ export default function RoomList() {
             
             <div className="relative z-10">
               <div className="inline-block px-6 py-2 bg-white/20 backdrop-blur-xl rounded-full text-sm font-bold mb-6">
-                🎉 특별 이벤트
+                특별 이벤트
               </div>
               <h2 className="text-4xl font-black mb-4">첫 예약 특별 할인</h2>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
